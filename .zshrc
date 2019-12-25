@@ -48,8 +48,9 @@ export REPORTTIME=10
 # completion
 autoload -Uz compinit
 zstyle ':completion:*' menu select=2
-zstyle :compinstall filename '/home/kisak/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 compinit
+setopt complete_aliases
 
 # correction
 setopt CORRECT
