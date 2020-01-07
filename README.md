@@ -4,6 +4,8 @@
 
 ## Installation
 
-Install the whole thing:
+Get the whole thing:
 
-```wget -O - https://raw.githubusercontent.com/delet-this/dotfiles/master/.local/bin/installdots.sh | /bin/sh```
+```
+wget -O - https://raw.githubusercontent.com/delet-this/dotfiles/master/.local/bin/installdots.sh | /bin/sh
+```
