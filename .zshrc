@@ -26,7 +26,7 @@ alias poweroff="sudo systemctl poweroff"
 alias halt="sudo systemctl halt"
 alias weather="curl wttr.in/varkaus"
 alias graceful="~/gracefulshutdown.sh"
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 PATH="$HOME/.local/bin:$PATH"
 #export WINEDLLPATH="$HOME/rpc-wine/bin32:$HOME/kisak/rpc-wine/bin64"
