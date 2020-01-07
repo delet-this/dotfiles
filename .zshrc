@@ -65,4 +65,8 @@ zplugin light zdharma/fast-syntax-highlighting
 
 #zstyle ':prompt:pure:prompt:*' color white 
 
-neofetch --off --cpu_temp C --refresh_rate on --memory_percent on
+export PF_INFO="title os host kernel uptime pkgs memory wm shell palette"
+export PF_ASCII="linux"
+
+#neofetch --off --cpu_temp C --refresh_rate on --memory_percent on
+pfetch
