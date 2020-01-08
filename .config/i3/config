@@ -47,6 +47,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 
 # Wallpaper
+# exec nitrogen --set-zoom-fill --head=0 ~/Pictures/gBMT9pk.jpg && nitrogen --set-zoom-fill --head=1 ~/Pictures/gBMT9pk.jpg
 # exec feh --bg-fill ~/Pictures/Wallpapers/gBMT9pk.jpg
 exec ~/.fehbg
 
