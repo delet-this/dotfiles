@@ -1,5 +1,5 @@
 # dotfiles
-ok
+
 ![alt text](.dotfiles/screenshot.png)
 
 ## Installation
