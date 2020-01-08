@@ -44,7 +44,7 @@ workspace 10 output $secondaryMonitor
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Polybar
-exec_always --no-startup-id "sleep 7; $HOME/.config/polybar/launch.sh"
+exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 
 # Wallpaper
 # exec nitrogen --set-zoom-fill --head=0 ~/Pictures/gBMT9pk.jpg && nitrogen --set-zoom-fill --head=1 ~/Pictures/gBMT9pk.jpg
@@ -283,6 +283,7 @@ mode "$mode_gaps_inner" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
 mode "$mode_gaps_outer" {
         bindsym plus  gaps outer current plus 5
         bindsym minus gaps outer current minus 5
@@ -309,7 +310,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Discord
-exec --no-startup-id exec discord
+exec --no-startup-id discord
 
 # Steam 
-exec --no-startup-id exec steam-runtime
+exec --no-startup-id steam-runtime
