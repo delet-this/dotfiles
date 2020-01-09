@@ -51,7 +51,7 @@ exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 exec ~/.fehbg
 
 # Compton
-exec_always --no-startup-id "killall -q compton; compton --config ~/.config/compton.conf"
+exec_always --no-startup-id "killall -q picom; picom --config ~/.config/compton.conf"
 
 # Redshift
 exec --no-startup-id redshift-gtk
