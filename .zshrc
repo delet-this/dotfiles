@@ -18,7 +18,7 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
 # aliases
-alias ls='ls --color=auto'
+alias ls='ls -hN --color=auto --group-directories-first'
 alias cal='cal -m'
 alias ccat='pygmentize -g'
 alias reboot="sudo systemctl reboot"
