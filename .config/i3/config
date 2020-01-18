@@ -59,6 +59,9 @@ exec --no-startup-id redshift-gtk
 # Anime Discord RPC Server 
 exec --no-startup-id python ~/animu_rpc_server.py
 
+# Mpris RPC
+exec --no-startup-id python ~/discord-rpc-mpris/main.py
+
 # KShare
 exec --no-startup-id kshare -b
 
