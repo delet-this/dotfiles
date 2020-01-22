@@ -48,19 +48,19 @@ exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 
 # Wallpaper
 # exec feh --bg-fill ~/Pictures/Wallpapers/gBMT9pk.jpg
-exec ~/.fehbg
+exec --no-startup-id ~/.fehbg
 
-# Compton
-exec_always --no-startup-id "killall -q picom; picom --config ~/.config/picom/picom.conf"
+# Picom 
+#exec_always --no-startup-id "killall -q picom; picom --config ~/.config/picom/picom.conf"
 
 # Redshift
 exec --no-startup-id redshift-gtk
 
 # Anime Discord RPC Server 
-exec --no-startup-id python ~/animu_rpc_server.py
+#exec --no-startup-id python ~/animu_rpc_server.py
 
 # Mpris RPC
-exec --no-startup-id python ~/discord-rpc-mpris/main.py
+#exec --no-startup-id python ~/discord-rpc-mpris/main.py
 
 # KShare
 exec --no-startup-id kshare -b
@@ -308,11 +308,5 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.local/bin/volume.sh up"
 bindsym XF86AudioLowerVolume exec --no-startup-id "~/.local/bin/volume.sh down"
 bindsym XF86AudioMute exec --no-startup-id "~/.local/bin/volume.sh mute"
 
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
-
-# Discord
-exec --no-startup-id discord
-
-# Steam 
-exec --no-startup-id steam-runtime
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness

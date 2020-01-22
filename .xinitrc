@@ -29,5 +29,15 @@ export DESKTOP_SESSION=i3
 
 # autoruns
 setxkbmap fi &
+
+# desktop autoruns
+if [ $(uname -n) = "valve" ]; then
+	picom --config ~/.config/picom/picom.conf &
+	discord &
+	steam-runtime &
+	python ~/animu_rpc_server.py &
+	python ~/discord-rpc-mpris/main.py &
+fi
+
 # window manager
 exec i3
