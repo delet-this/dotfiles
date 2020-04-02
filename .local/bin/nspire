@@ -1,0 +1,61 @@
+#!/bin/sh
+set -x
+TISOFT=$HOME/nspire
+WINEPREFIX="$TISOFT"/.wine_nspire
+LANGUAGE=$(echo $LANG | cut -d '_' -f 1)
+COUNTRY=$(echo $LANG | cut -d '_' -f 2 | cut -d '.' -f 1)
+USERWINE=/home/$USER/.wine_nspire
+TI_SDF=$USERWINE/drive_c/ProgramData/TI-Nspire\ CX\ CAS
+TI_SDF4PROPERTIES="$USERWINE"/drive_c/users/Public/Application\ Data/TI-Nspire\ CX\ CAS
+
+WINE=wine
+if ! which "${WINE}"
+then
+    WINE=/usr/lib/wine/wine
+fi
+
+[ -d "$WINEPREFIX"/drive_c/Program\ Files/TI\ Education/TI-Nspire\ CX\ CAS\ Student\ Software ] && XFOLDER=""
+[ -d "$WINEPREFIX"/drive_c/"Program Files (x86)"/TI\ Education/TI-Nspire\ CX\ CAS\ Student\ Software ] && XFOLDER=" (x86)"
+[ ! -d "/home/$USER"/TI-Nspire\ CX/MyWidgets ] && mkdir -p "/home/$USER"/TI-Nspire\ CX/MyWidgets
+
+if [ -d $TISOFT/resources/widgets ]
+then
+  cp -fp $TISOFT/resources/widgets/* "/home/$USER"/TI-Nspire\ CX/MyWidgets/
+fi
+
+if [ ! -f "$TI_SDF4PROPERTIES"/res/INSTALL.LOG ]
+then
+    # Create user's wineprefix TODO:(if works remove)
+    env WINEARCH=win32 WINE="$WINE" WINEPREFIX="$USERWINE" WINEDLLOVERRIDES=mscoree,mshtml= winetricks win7
+    mkdir -p "$USERWINE/drive_c/users/$USER/Application Data/Texas Instruments/TI-Nspire CX CAS Student Software"
+    cp $TISOFT/resources/preferences.properties $USERWINE/drive_c/users/$USER/Application\ Data/Texas\ Instruments/TI-Nspire\ CX\ CAS\ Student\ Software/preferences.properties
+
+    # Set the locale and country from the OS to the applications
+    echo "locale=$LANGUAGE" >> $USERWINE/drive_c/users/$USER/Application\ Data/Texas\ Instruments/TI-Nspire\ CX\ CAS\ Student\ Software/preferences.properties
+    echo "country=$COUNTRY" >> $USERWINE/drive_c/users/$USER/Application\ Data/Texas\ Instruments/TI-Nspire\ CX\ CAS\ Student\ Software/preferences.properties
+    mkdir -p "$TI_SDF"/license
+    cp "$TISOFT"/resources/lservrc "$TI_SDF"/license/lservrc
+    mkdir -p "$TI_SDF4PROPERTIES"/res
+    cp $TISOFT/resources/settings.properties "$TI_SDF4PROPERTIES"/res/settings.properties
+    cp $TISOFT/resources/deployment.properties "$TI_SDF4PROPERTIES"/res/deployment.properties
+    cp "$WINEPREFIX"/drive_c/Program\ Files"$XFOLDER"/TI\ Education/TI-Nspire\ CX\ CAS\ Student\ Software/fonts/* "$USERWINE"/drive_c/windows/Fonts/
+    # Install Visual Studio 2015 runtime environment
+    WINEPREFIX="$USERWINE" $TISOFT/resources/winetricksReplica --force vcrun2015
+    WINEPREFIX="$USERWINE" "$WINE" $TISOFT/resources/vc_redist.x86.exe /q
+    # Remove Visual Studio 2015 installer after installation
+    rm -rf $TISOFT/resources/winetricksReplica
+    rm -rf $TISOFT/resources/vc_redist.x86.exe
+
+    touch "$TI_SDF4PROPERTIES/res/INSTALL.LOG"
+fi
+if ps aux | grep -v "grep" | grep "TI-Nspire CX CAS Student Software.exe"
+then
+	WINEPREFIX="$USERWINE" WINEDLLOVERRIDES="mscoree,mshtml=" "$WINE" $TISOFT/launcher/nspire_notification.exe $LANGUAGE
+else
+	#win32
+	if [ -n "$*" ]
+    then
+        FILE_WINE_PATH=$(WINEPREFIX="${USERWINE}" winepath "$@" | sed 's/.*z:/z:/')
+    fi
+	      WINEPREFIX="$USERWINE" WINEDLLOVERRIDES="mscoree,mshtml=" "$WINE" $WINEPREFIX/drive_c/Program\ Files"$XFOLDER"/TI\ Education/TI-Nspire\ CX\ CAS\ Student\ Software/TI-Nspire\ CX\ CAS\ Student\ Software.exe "${FILE_WINE_PATH}"
+fi
