@@ -1,3 +1,4 @@
+TERM=xterm-256color
 PURE_PROMPT_SYMBOL="λ"
 
 # load zplugin
