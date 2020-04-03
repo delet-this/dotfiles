@@ -226,7 +226,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Assign programs to specific workspaces
 assign [class="^discord$"] → $ws2
-assign [class="^Steam$"] → $ws4
+#assign [class="^Steam$"] → $ws4
+assign [class="Steam"] → $ws4
 #assign [Title="osu!"] → $ws3
 assign [Title="- OpenGL"] → $ws3
 assign [class="^Wine$"] → $ws3
