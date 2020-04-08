@@ -12,11 +12,12 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 # vi mode
-#bindkey -v
+bindkey -v
 
-# home and end binds
+# binds
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+bindkey "^R" history-incremental-search-backward
 
 # aliases
 alias ls='ls -hN --color=auto --group-directories-first'
