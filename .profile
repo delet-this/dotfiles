@@ -1,12 +1,15 @@
+# Add ~/.local/bin to $PATH
 export PATH="$HOME/.local/bin:$PATH"
-export QT_STYLE_OVERRIDE="gtk2"
 
+# Set default applications
 export EDITOR="vim"
-export VEDITOR="subl3"
+export VEDITOR="code"
 export TERMINAL="termite"
-export BROWSER="firefox"
+export BROWSER="chromium"
 
-# start x
+export QT_QPA_PLATFORMTHEME="gtk2" # Use gtk2 theme for qt
+
+# Start X
 if ([ -z "$DISPLAY" ] && [ $XDG_VTNR -eq 1 ]); then
   exec startx -- -keeptty vt1 &> /dev/null
 fi

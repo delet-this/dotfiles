@@ -14,10 +14,6 @@ client.background       #ffffff
 
 # Basic stuff
 set $mod Mod4
-#gaps top 10
-#gaps left 10
-#gaps right 10
-#gaps bottom 10
 gaps inner 5
 gaps outer 5
 new_window 1pixel
@@ -79,6 +75,19 @@ exec --no-startup-id unclutter --timeout 30
 # Set scroll speed
 exec --no-startup-id imwheel --kill -b 45
 
+# Variables for workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Use floating mode for dialogs and pop-ups
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable 
 for_window [window_role="task_dialog"] floating enable
@@ -100,6 +109,15 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
+# Assign programs to specific workspaces
+assign [class="Firefox|Chromium"] → $ws1 
+assign [class="^discord$"] → $ws2
+#assign [class="^Steam$"] → $ws4
+assign [class="Steam"] → $ws4
+#assign [Title="osu!"] → $ws3
+assign [Title="- OpenGL"] → $ws3
+#assign [class="^Wine$"] → $ws3
+
 # Font for window titles. Will also be used by the bar unless a different font
 font pango:monospace 8
 
@@ -107,10 +125,11 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec $TERMINAL 
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec rofi -show run
@@ -120,8 +139,6 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down 
 bindsym $mod+k focus up 
 bindsym $mod+l focus right 
-# bindsym $mod+odiaeresis focus right
-
 # alternatively, you can use the arrow keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -133,7 +150,6 @@ bindsym $mod+Shift+h move left 30
 bindsym $mod+Shift+j move down 30 
 bindsym $mod+Shift+k move up 30
 bindsym $mod+Shift+l move right 30
-
 # alternatively, you can use the arrow keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -187,19 +203,6 @@ mode "$mode_system" {
 
 bindsym $mod+z mode "$mode_system"
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -224,13 +227,17 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# Assign programs to specific workspaces
-assign [class="^discord$"] → $ws2
-#assign [class="^Steam$"] → $ws4
-assign [class="Steam"] → $ws4
-#assign [Title="osu!"] → $ws3
-assign [Title="- OpenGL"] → $ws3
-assign [class="^Wine$"] → $ws3
+# Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.local/bin/volume.sh up"
+bindsym XF86AudioLowerVolume exec --no-startup-id "~/.local/bin/volume.sh down"
+bindsym XF86AudioMute exec --no-startup-id "~/.local/bin/volume.sh mute"
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -247,10 +254,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -305,14 +312,7 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.local/bin/volume.sh up"
-bindsym XF86AudioLowerVolume exec --no-startup-id "~/.local/bin/volume.sh down"
-bindsym XF86AudioMute exec --no-startup-id "~/.local/bin/volume.sh mute"
 
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
+
+

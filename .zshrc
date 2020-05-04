@@ -27,22 +27,11 @@ alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias halt="sudo systemctl halt"
 alias weather="curl wttr.in/varkaus"
-alias graceful="~/gracefulshutdown.sh"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-PATH="$HOME/.local/bin:$PATH"
-#export WINEDLLPATH="$HOME/rpc-wine/bin32:$HOME/kisak/rpc-wine/bin64"
-#export WINEDLLPATH="/usr/lib/discord-rpc-wine/x86_64:/usr/lib/discord-rpc-wine/i686:$WINEDLLPATH"
-
 
 # locale
 export LANG='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
-
-# default programs
-export EDITOR='vim'
-export VEDITOR='subl3'
-export BROWSER='firefox'
 
 # print stats if command took longer than 10s
 export REPORTTIME=10
