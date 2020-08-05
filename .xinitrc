@@ -28,9 +28,11 @@ export XDG_CURRENT_DESKTOP=i3
 export DESKTOP_SESSION=i3
 
 # autoruns
-setxkbmap fi &
+#setxkbmap fi &
+setxkbmap -layout us -variant altgr-intl &
+xset r rate 300 50 &	# Faster key repeat
 
-# desktop autoruns
+# desktop only autoruns
 if [ $(uname -n) = "valve" ]; then
 	picom --config ~/.config/picom/picom.conf &
 	discord &
@@ -39,5 +41,5 @@ if [ $(uname -n) = "valve" ]; then
 	python ~/discord-rpc-mpris/main.py &
 fi
 
-# window manager
+# start window manager
 exec i3
