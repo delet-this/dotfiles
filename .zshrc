@@ -8,8 +8,17 @@ SAVEHIST=$HISTSIZE
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
+# completion
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+setopt complete_aliases
+
 # vi mode
 bindkey -v
+export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -38,6 +47,9 @@ alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -vI"
 
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
 # locale
 export LANG='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
@@ -45,12 +57,7 @@ export LC_CTYPE='en_US.UTF-8'
 # print stats if command took longer than 10s
 export REPORTTIME=10
 
-# completion
-autoload -Uz compinit
-zstyle ':completion:*' menu select=2
-zstyle :compinstall filename '$HOME/.zshrc'
-compinit
-setopt complete_aliases
+
 
 # correction
 setopt CORRECT
@@ -58,7 +65,7 @@ setopt CORRECT
 # more options
 setopt nobeep
 setopt autocd
-#zstyle ':prompt:pure:prompt:*' color white 
+#zstyle ':prompt:pure:prompt:*' color white
 
 export PF_INFO="title os host kernel uptime pkgs memory wm shell palette"
 export PF_ASCII="linux"
@@ -91,4 +98,3 @@ zinit light-mode for \
 zinit light mafredri/zsh-async
 zinit light sindresorhus/pure
 zinit light zdharma/fast-syntax-highlighting
-

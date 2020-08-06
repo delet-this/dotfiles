@@ -7,6 +7,7 @@ export VEDITOR="code"
 export TERMINAL="termite"
 export BROWSER="chromium"
 
+export QT_ENABLE_HIGHDPI_SCALING=0
 export QT_QPA_PLATFORMTHEME="gtk2" # Use gtk2 theme for qt
 
 # Start X
