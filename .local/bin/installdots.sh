@@ -4,8 +4,6 @@ dotfiles () {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 dotfiles config --local status.showUntrackedFiles no
-dotfiles config --local core.sparseCheckout true
-printf '/*\n!README.*\n' > $HOME/.dotfiles/info/sparse-checkout
 dotfiles checkout
 if [ $? = 0 ]; then
   echo "Checked out dotfiles."
@@ -15,3 +13,7 @@ else
   dotfiles checkout
   echo "Checked out dotfiles."
 fi
+dotfiles config --local core.sparseCheckout true
+printf '/*\n!README.*\n' > $HOME/.dotfiles/info/sparse-checkout
+dotfiles sparse-checkout reapply
+echo "Enabled sparsity and applied patterns."
