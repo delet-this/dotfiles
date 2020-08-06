@@ -11,7 +11,7 @@ if [ $? = 0 ]; then
   echo "Checked out dotfiles."
 else
   echo "Backing up pre-existing dotfiles."
-  dotfiles checkout 2>&1 | egrep "^\t" | awk {'print $1'} | xargs -I{} sh -c 'mkdir -p .dotfiles-backup/$(dirname {}); mv {} .dotfiles-backup/{}'
+  dotfiles checkout 2>&1 | awk '/\t/' | awk {'print $1'} | xargs -I{} sh -c 'mkdir -p .dotfiles-backup/$(dirname {}); mv {} .dotfiles-backup/{}'
   dotfiles checkout
   echo "Checked out dotfiles."
 fi
