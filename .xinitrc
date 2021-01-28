@@ -31,15 +31,29 @@ export DESKTOP_SESSION=i3
 #setxkbmap fi &
 setxkbmap -layout us -variant altgr-intl &
 xset r rate 300 50 &	# Faster key repeat
+clipster -d &
 
 # desktop only autoruns
 if [ $(uname -n) = "valve" ]; then
-	picom --config ~/.config/picom/picom.conf &
+	#picom --config ~/.config/picom/picom.conf &
+	~/.screenlayout/layout.sh &
 	discord &
 	steam-runtime &
 	python ~/animu_rpc_server.py &
 	python ~/discord-rpc-mpris/main.py &
+	whoogle-search &
+	pulseeffects --gapplication-service &
+	xbindkeys &
+	~/.fehbg &
+	dunst &
+	kshare -b &
+	redshift-gtk &
+	unclutter --timeout 30 &
+	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+	imwheel --kill -b 45 &
 fi
 
 # start window manager
-exec i3
+#exec kwin_x11
+#exec startplasma-x11
+exec openbox

@@ -1,4 +1,4 @@
-TERM=xterm-256color
+ugRM=xterm-256color
 PURE_PROMPT_SYMBOL="λ"
 
 # history
@@ -16,6 +16,12 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 setopt complete_aliases
 
+# auto quote urls
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -31,9 +37,12 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^R" history-incremental-search-backward
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 # aliases
 alias ls='ls -hN --color=auto --group-directories-first'
+alias ip="ip -c"
 alias cal='cal -m'
 alias ccat='pygmentize -g'
 alias reboot="sudo systemctl reboot"
@@ -46,6 +55,8 @@ alias yta="yt -x -f bestaudio/best"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -vI"
+alias imv='imv -c "exec _wid=\$(xdo id);xprop -f WM_CLIENT_MACHINE 8s -set WM_CLIENT_MACHINE \$(hostname) -id \$_wid;xprop -f _NET_WM_PID 32c -set _NET_WM_PID \$imv_pid -id \$_wid;pidswallow -gt \$_wid"'
+alias syu="sudo pacman -Syu"
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -66,6 +77,11 @@ setopt CORRECT
 setopt nobeep
 setopt autocd
 #zstyle ':prompt:pure:prompt:*' color white
+
+export FZF_DEFAULT_COMMAND="fd"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+#export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 export PF_INFO="title os host kernel uptime pkgs memory wm shell palette"
 export PF_ASCII="linux"
@@ -95,6 +111,9 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 ## End of Zinit's installer chunk
+zinit light zdharma/fast-syntax-highlighting
+#zinit light zsh-users/zsh-autosuggestions
 zinit light mafredri/zsh-async
 zinit light sindresorhus/pure
-zinit light zdharma/fast-syntax-highlighting
+zinit light hlissner/zsh-autopair
+#zinit light marlonrichert/zsh-autocomplete

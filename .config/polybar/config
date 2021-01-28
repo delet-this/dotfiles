@@ -23,7 +23,7 @@ background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = ${xrdb:foreground:#dfdfdf}
 foreground-alt = #BA87A4
-primary = #BA87A4 
+primary = #BA87A4
 secondary = #e60053
 alert = #bd2c40
 
@@ -36,7 +36,7 @@ height = 23
 ;offset-x = 1%
 ;offset-y = 1%
 #radius = 6.0
-fixed-center = true 
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -53,11 +53,11 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = ypn envypn
+font-0 = envypn
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = MisakiGothic:style=Regular:pixelsize=10;1 
-font-4 = "Font Awesome 5 Free Solid:pixelsize=8;1" 
+font-2 = Siji:pixelsize=10;1
+font-3 = MisakiGothic:style=Regular:pixelsize=10;1
+font-4 = "Font Awesome 5 Free Solid:pixelsize=8;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=8;1"
 
 modules-left = i3 xwindow
@@ -93,7 +93,7 @@ height = 23
 ;offset-x = 1%
 ;offset-y = 1%
 #radius = 6.0
-fixed-center = true 
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -110,11 +110,11 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = ypn envypn
+font-0 = envypn
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = MisakiGothic:style=Regular:pixelsize=10;1 
-font-4 = "Font Awesome 5 Free Solid:pixelsize=8;1" 
+font-2 = Siji:pixelsize=10;1
+font-3 = MisakiGothic:style=Regular:pixelsize=10;1
+font-4 = "Font Awesome 5 Free Solid:pixelsize=8;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=8;1"
 
 modules-left = i3
@@ -142,7 +142,7 @@ cursor-scroll = ns-resize
 [module/pacman-updates]
 type = custom/script
 ;exec = pacman -Qu | wc -l
-exec = CHECKUPDATES_DB=$(mktemp -d) checkupdates | wc -l 
+exec = CHECKUPDATES_DB=$(mktemp -d) checkupdates | wc -l
 interval = 1000
 label = %output%
 tail = true
@@ -152,34 +152,34 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = " "
 
 [module/networkspeeddown]
-;https://github.com/jaagr/polybar/wiki/Module:-network 
+;https://github.com/jaagr/polybar/wiki/Module:-network
 type = internal/network
 ;interface = wlp1s0
 ;interface = enp14s0
 ;interface = enp0s31f6
-interface = enp4s0
+interface = enp3s0
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-#format-connected-prefix-foreground = #282C34 
-#format-connected-foreground = #282C34 
+#format-connected-prefix-foreground = #282C34
+#format-connected-foreground = #282C34
 #format-connected-background = #E06C75
 
 [module/networkspeedup]
-;https://github.com/jaagr/polybar/wiki/Module:-network 
+;https://github.com/jaagr/polybar/wiki/Module:-network
 type = internal/network
 ;interface = wlp1s0
 ;interface = enp14s0
 ;interface = enp0s31f6
-interface = enp4s0
+interface = enp3s0
 label-connected = "%upspeed:7% "
 format-connected = <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-#format-connected-prefix-foreground = #282C34 
-#format-connected-foreground = #282C34 
-#format-connected-background = #E06C75 
+#format-connected-prefix-foreground = #282C34
+#format-connected-foreground = #282C34
+#format-connected-background = #E06C75
 
 [module/network-traffic]
 type = custom/script
@@ -217,7 +217,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
 type = internal/i3
-index-sort = false 
+index-sort = false
 wrapping-scroll = false
 strip-wsnumbers = false
 pin-workspaces = true
@@ -230,7 +230,7 @@ ws-icon-4 = 5;
 ws-icon-5 = 6;%{T5}%{T-}
 ws-icon-6 = 7;
 ws-icon-7 = 8;
-ws-icon-8 = 9;%{T5}%{T-} 
+ws-icon-8 = 9;%{T5}%{T-}
 ws-icon-9 = 10;
 ws-icon-default = " "
 
@@ -269,7 +269,7 @@ label-urgent-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
-format-foreground = ${colors.foreground} 
+format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
 [module/player-mpris-simple]
@@ -415,7 +415,7 @@ type = internal/alsa
 
 format-volume-prefix =" "
 format-volume-prefix-foreground = ${colors.foreground-alt}
-format-volume = <label-volume> 
+format-volume = <label-volume>
 label-volume =  %percentage%%
 label-volume-foreground = ${root.foreground}
 

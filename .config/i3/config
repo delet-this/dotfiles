@@ -1,4 +1,4 @@
-# i3 config file 
+# i3 config file
 
 set_from_resource $fg     foreground
 set_from_resource $bg     background
@@ -19,15 +19,18 @@ gaps outer 5
 new_window 1pixel
 for_window [class="^.*"] border pixel 4
 
+set $menu rofi -show drun --terminal termite -fullscreen -fake-transparency -fake-background screenshot
+bindsym $mod+space exec $menu
+
 # Disable screensaver
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s noblank
 
 # Monitors
-exec --no-startup-id xrandr --output DVI-D-0 --primary  
+exec --no-startup-id xrandr --output DVI-D-0 --primary
 set $primaryMonitor DVI-D-0
-set $secondaryMonitor HDMI-0 
+set $secondaryMonitor HDMI-A-0
 
 # Workspaces on specific monitors
 workspace 1 output $primaryMonitor
@@ -51,13 +54,13 @@ exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 # exec feh --bg-fill ~/Pictures/Wallpapers/gBMT9pk.jpg
 exec --no-startup-id ~/.fehbg
 
-# Picom 
+# Picom
 #exec_always --no-startup-id "killall -q picom; picom --config ~/.config/picom/picom.conf"
 
 # Redshift
 exec --no-startup-id redshift-gtk
 
-# Anime Discord RPC Server 
+# Anime Discord RPC Server
 #exec --no-startup-id python ~/animu_rpc_server.py
 
 # Mpris RPC
@@ -89,15 +92,15 @@ set $ws10 "10"
 
 # Use floating mode for dialogs and pop-ups
 for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable 
+for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
-for_window [window_type="dialog"] floating enable 
+for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [class="^vlc$"] floating enable
 
 # Steam floating
-for_window [class="Steam"] floating enable, border none  
+for_window [class="Steam"] floating enable, border none
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
 for_window [class="^Steam$" title=".* - Chat"] floating enable
@@ -110,7 +113,7 @@ for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Require
 for_window [title="^Steam Keyboard$"] floating enable
 
 # Assign programs to specific workspaces
-assign [class="Firefox|Chromium"] → $ws1 
+assign [class="Firefox|Chromium"] → $ws1
 assign [class="^discord$"] → $ws2
 #assign [class="^Steam$"] → $ws4
 assign [class="Steam"] → $ws4
@@ -125,20 +128,20 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $TERMINAL 
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $mod+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
 
 # change focus
 bindsym $mod+h focus left
-bindsym $mod+j focus down 
-bindsym $mod+k focus up 
-bindsym $mod+l focus right 
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 # alternatively, you can use the arrow keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -147,7 +150,7 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left 30
-bindsym $mod+Shift+j move down 30 
+bindsym $mod+Shift+j move down 30
 bindsym $mod+Shift+k move up 30
 bindsym $mod+Shift+l move right 30
 # alternatively, you can use the arrow keys:
@@ -174,15 +177,22 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym --whole-window  $mod+button2 floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# toggle composition
+bindsym $mod+p exec --no-startup-id "bash -c 'if ! pkill -x picom || ! notify-send -t 1000 '\''Compositor disabled'\''; then picom --config ~/.config/picom/picom.conf & notify-send -t 1000 '\''Compositor enabled'\''; fi' "
+
+# toggle sticky
+bindsym $mod+Shift+S sticky toggle
 
 # shutdown, reboot, lock
 set $Locker betterlockscreen -l dim && sleep 1
@@ -194,7 +204,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -311,8 +321,3 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-
-
-
-
