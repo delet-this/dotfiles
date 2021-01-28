@@ -1,7 +1,7 @@
 #!/bin/sh
 git clone --bare --depth 1 --recursive https://github.com/delet-this/dotfiles.git $HOME/.dotfiles
 dotfiles () {
-   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 dotfiles config --local status.showUntrackedFiles no
 dotfiles checkout
