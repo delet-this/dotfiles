@@ -1,0 +1,11 @@
+"termite"
+  Mod4 + Return
+
+"wmctrl -c :ACTIVE:"
+  Mod4 + Shift + q
+
+"rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi"
+  Mod4 + Shift + d
+
+"betterlockscreen -l dim"
+  Mod4 + l
