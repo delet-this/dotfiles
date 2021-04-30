@@ -1,5 +1,3 @@
-let mapleader = ","
-
 " Install vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -32,38 +30,46 @@ let g:coc_global_extensions = [
 \ ]
 
 if has('nvim')
+" Substitution live preview
   set inccommand=nosplit
 endif
-
-set nocompatible
 set mouse=a
 set clipboard=unnamedplus
+set nocompatible
+" Indent
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
-set laststatus=2
-set hidden
-set confirm
-set number relativenumber
+" Searching
 set ignorecase
 set smartcase
+" Syntax
+syntax on
+filetype plugin on
+" Visual
+set nowrap
+set number relativenumber
+set laststatus=2
+set background=dark
+colorscheme gruvbox
+" Misc
+set hidden
+set confirm
 set scrolloff=5
 set updatetime=50
-set nowrap
-filetype plugin on
 
-colorscheme gruvbox
+let mapleader = ","
 
 " Map Ctrl-Backspace to delete the previous word in insert mode.
   noremap! <C-BS> <C-w>
   noremap! <C-h> <C-w>
 
-" jump to overflowed lines
+" Jump to overflowed lines
   nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
   nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" center display after searching
+" Center display after searching
   nnoremap n   nzz
   nnoremap N   Nzz
   nnoremap *   *zz
@@ -72,25 +78,25 @@ colorscheme gruvbox
   nnoremap g#  g#z
 
 " This unsets the 'last search pattern' register by hitting return
-	nnoremap <CR> :noh<CR><CR>
+  nnoremap <CR> :noh<CR><CR>
 
 " Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+  nnoremap S :%s//g<Left><Left>
 
 " Don't cut when using c or C
   nnoremap c "_c
   nnoremap C "_C
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+  cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
-	autocmd BufWritePre * %s/\s\+$//e
-	autocmd BufWritepre * %s/\n\+\%$//e
+  autocmd BufWritePre * %s/\s\+$//e
+  autocmd BufWritepre * %s/\n\+\%$//e
 
 " Relative numbers in normal mode, absolute numbers in insert mode
-	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
