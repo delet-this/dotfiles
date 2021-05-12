@@ -18,4 +18,3 @@ for i in $( xrandr -q | grep ' connected' | grep -oP '\d+x\d+\+\d+\+\d+')
 do
     _screen $i "$1" "${2:-#000000}" "${3:-0}"
 done
-

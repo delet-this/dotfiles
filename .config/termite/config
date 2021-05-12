@@ -2,9 +2,9 @@
 # special
 foreground      = #dfdfdf
 foreground_bold = #dfdfdf
-cursor          = #dfdfdf 
+cursor          = #dfdfdf
 #background      = rgba(39, 51, 57, 0.9)
-background      = rgba(34, 34, 34, 0.95) 
+background      = rgba(34, 34, 34, 0.95)
 
 color0 = #1D2330
 color1 = #645377
@@ -24,7 +24,8 @@ color14 = #7B8290
 color15 = #d1d7e1
 
 [options]
-font = Terminus (TTF) 12
+# font = Terminus (TTF) 12
+font = Source Code Pro 11
 title = termite
 #icon_name = termite
 dynamic_title = false

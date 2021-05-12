@@ -1,4 +1,4 @@
-ugRM=xterm-256color
+TERM=xterm-256color
 PURE_PROMPT_SYMBOL="λ"
 
 # history
@@ -14,7 +14,8 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
-setopt complete_aliases
+#setopt complete_aliases
+zstyle ':completion:*' rehash true
 
 # auto quote urls
 autoload -Uz bracketed-paste-magic
@@ -39,6 +40,7 @@ bindkey "^[[F" end-of-line
 bindkey "^R" history-incremental-search-backward
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+bindkey '^H' backward-kill-word
 
 # aliases
 alias ls='ls -hN --color=auto --group-directories-first'
@@ -57,6 +59,11 @@ alias mv="mv -iv"
 alias rm="rm -vI"
 alias imv='imv -c "exec _wid=\$(xdo id);xprop -f WM_CLIENT_MACHINE 8s -set WM_CLIENT_MACHINE \$(hostname) -id \$_wid;xprop -f _NET_WM_PID 32c -set _NET_WM_PID \$imv_pid -id \$_wid;pidswallow -gt \$_wid"'
 alias syu="sudo pacman -Syu"
+alias make="make -j$(nproc)"
+alias v="vim"
+alias vc="vim .vimrc"
+alias pac="sudo pacman"
+alias librewolf-wayland="MOZ_ENABLE_WAYLAND=1 librewolf"
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -68,8 +75,6 @@ export LC_CTYPE='en_US.UTF-8'
 # print stats if command took longer than 10s
 export REPORTTIME=10
 
-
-
 # correction
 setopt CORRECT
 
@@ -77,6 +82,9 @@ setopt CORRECT
 setopt nobeep
 setopt autocd
 #zstyle ':prompt:pure:prompt:*' color white
+
+# pywal colors
+cat ~/.cache/wal/sequences;
 
 export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -87,7 +95,7 @@ export PF_INFO="title os host kernel uptime pkgs memory wm shell palette"
 export PF_ASCII="linux"
 
 #neofetch --off --cpu_temp C --refresh_rate on --memory_percent on
-pfetch
+# pfetch
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -111,9 +119,14 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 ## End of Zinit's installer chunk
+zinit light Aloxaf/fzf-tab
 zinit light zdharma/fast-syntax-highlighting
 #zinit light zsh-users/zsh-autosuggestions
 zinit light mafredri/zsh-async
 zinit light sindresorhus/pure
 zinit light hlissner/zsh-autopair
 #zinit light marlonrichert/zsh-autocomplete
+
+bindkey '^H' backward-kill-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word

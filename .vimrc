@@ -10,10 +10,12 @@ if has('nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'ThePrimeagen/vim-be-good'
 endif
+  Plug 'neoclide/jsonc.vim'
   Plug 'PotatoesMaster/i3-vim-syntax'
   Plug 'tpope/vim-commentary'
   Plug 'vim-airline/vim-airline'
   Plug 'gruvbox-community/gruvbox'
+  Plug 'joshdick/onedark.vim'
 call plug#end()
 
 " Run PlugInstall if there are missing plugins
@@ -33,6 +35,8 @@ if has('nvim')
 " Substitution live preview
   set inccommand=nosplit
 endif
+set path+=**
+set wildmenu
 set mouse=a
 set clipboard=unnamedplus
 set nocompatible
@@ -42,17 +46,24 @@ set shiftwidth=2
 set expandtab
 set smartindent
 " Searching
+set hlsearch
+set incsearch
 set ignorecase
 set smartcase
 " Syntax
 syntax on
 filetype plugin on
 " Visual
+set showtabline=2
+set noshowmode
 set nowrap
 set number relativenumber
 set laststatus=2
 set background=dark
-colorscheme gruvbox
+if has('termguicolors')
+  set termguicolors
+endif
+colorscheme onedark
 " Misc
 set hidden
 set confirm
@@ -100,3 +111,5 @@ let mapleader = ","
 
 " Disables automatic commenting on newline:
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+  " so vimrc

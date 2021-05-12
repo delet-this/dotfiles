@@ -1,11 +1,47 @@
-"termite"
+"$TERMINAL"
   Mod4 + Return
+
+"$BROWSER"
+  Mod4 + w
 
 "wmctrl -c :ACTIVE:"
   Mod4 + Shift + q
 
+"wmctrl -c :ACTIVE:"
+  Mod4 + q
+
 "rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi"
   Mod4 + Shift + d
 
+"rofi -show drun --terminal termite -fullscreen -fake-transparency -fake-background screenshot"
+  Mod4 + space
+
 "betterlockscreen -l dim"
   Mod4 + l
+
+"wmctrl -r :ACTIVE: -b toggle,fullscreen"
+  Mod4 + f
+
+"bash -c 'if ! pkill -x picom || ! notify    -send -t 1000 '\''Compositor disabled'\''; then picom --config ~/.config/picom/picom.conf & notify-send -t 1000 '\''Compositor enabled'\''; fi'"
+  Mod4 + p
+
+"~/.local/bin/volume.sh up"
+  XF86AudioRaiseVolume
+"~/.local/bin/volume.sh down"
+  XF86AudioLowerVolume
+"~/.local/bin/volume.sh mute"
+  XF86AudioMute
+
+"playerctl play-pause"
+  XF86AudioPlay
+
+"playerctl previous"
+  XF86AudioPrev
+
+"playerctl next"
+  XF86AudioNext
+
+"xbacklight -inc 10"
+  XF86MonBrightnessUp
+"xbacklight -dec 10"
+  XF86MonBrightnessDown
