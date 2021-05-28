@@ -1,0 +1,12 @@
+env:
+  TERM: xterm-256color
+
+font:
+  normal:
+    family: "Source Code Pro"
+  bold:
+    family: "Source Code Pro"
+  italic:
+    family: "Source Code Pro"
+
+  size: 11

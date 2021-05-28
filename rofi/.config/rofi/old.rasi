@@ -1,0 +1,10 @@
+configuration {
+	font: "Terminus (TTF) 12";
+	bw: 0;
+	separator-style: "none";
+	hide-scrollbar: true;
+	color-normal: "0, #FFFFFF, 0, 0, #BA87A4";
+	color-urgent: "#2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b";
+	color-active: "0, #b48ead, 0, 0, #93e5cc";
+	color-window: "argb:f21e1e1e, 0, 0, 0, 0";
+}

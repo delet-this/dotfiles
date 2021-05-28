@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd ~/Games/KrunkerIdkr
+./idkr-portable-linux-x86_64.AppImage --no-sandbox --disable-breakpad --disable-logging --disable-metrics --disable-metrics-reporting --disable-dev-tools
