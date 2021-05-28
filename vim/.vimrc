@@ -92,7 +92,7 @@ let mapleader = " "
   nnoremap g*  g*zz
   nnoremap g#  g#z
 
-" This unsets the 'last search pattern' register by hitting escape
+" Unset last search pattern' register with leader space
   nnoremap <leader><space> :noh<CR>
 
 " Replace all is aliased to S.
