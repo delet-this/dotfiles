@@ -55,7 +55,7 @@ set smartcase
 syntax on
 filetype plugin on
 " Visual
-set showtabline=2
+set showtabline=1
 set noshowmode
 set nowrap
 set number relativenumber
@@ -64,7 +64,7 @@ set background=dark
 if has('termguicolors')
   set termguicolors
 endif
-colorscheme onedark
+colorscheme gruvbox
 " Misc
 set hidden
 set confirm
