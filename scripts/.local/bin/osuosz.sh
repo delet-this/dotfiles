@@ -1,0 +1,11 @@
+#!/bin/bash
+export GST_PLUGIN_SYSTEM_PATH_1_0="/home/kisak/.local/share/lutris/runners/wine/lutris-6.4-x86_64/lib64/gstreamer-1.0/:/home/kisak/.local/share/lutris/runners/wine/lutris-6.4-x86_64/lib/gstreamer-1.0/"
+export WINEESYNC="0"
+export WINEFSYNC="1"
+export RADV_DEBUG="zerovram"
+export WINEDLLOVERRIDES="d3d10core,d3d11,d3d12,d3d9,dxgi=n;winemenubuilder.exe=d"
+export WINE_LARGE_ADDRESS_AWARE="1"
+export WINEPREFIX="/home/kisak/Games/osu!/.wine_osu/"
+export WINESERVER="/home/kisak/.local/share/lutris/runners/wine/lutris-6.4-x86_64/bin/wineserver"
+export WINE="/home/kisak/.local/share/lutris/runners/wine/lutris-6.4-x86_64/bin/wine"
+/home/kisak/.local/share/lutris/runners/wine/lutris-6.4-x86_64/bin/wine start /ProgIDOpen osu! "$1"

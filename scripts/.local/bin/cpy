@@ -1,0 +1,11 @@
+#!/bin/bash
+# Copy a file to clipboard
+# If it's jpg then convert to png to work around a bug
+file=$1
+if [[ ( $file == *.jpg ) || ( $file == *.jpeg ) ]]; then
+  mkdir -p /tmp/cpy
+  convertedFile=/tmp/cpy/$(shuf -i 100000-999999 -n 1).png
+  magick convert $file $convertedFile
+  file=$convertedFile
+fi
+wl-copy < $file
