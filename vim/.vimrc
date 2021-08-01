@@ -84,7 +84,7 @@ let mapleader = " "
   nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
   nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" Center display after searching
+" Center display when searching
   nnoremap n   nzz
   nnoremap N   Nzz
   nnoremap *   *zz
@@ -101,6 +101,9 @@ let mapleader = " "
 " Don't cut when using c or C
   nnoremap c "_c
   nnoremap C "_C
+
+" Make Y behave like D and C
+  noremap Y y$
 
 " Save file as sudo on files that require root permission
   cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!

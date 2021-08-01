@@ -6,11 +6,11 @@
 # $./volume.sh mute
 
 function get_volume {
-  amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+  amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
 }
 
 function is_mute {
-  amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+  amixer -D pulse get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
 }
 
 function send_notification {
@@ -46,23 +46,23 @@ function send_notification {
 
 case $1 in
   up)
-    amixer set Master on > /dev/null
-    amixer set Master 2%+ > /dev/null
+    amixer -D pulse set Master on > /dev/null
+    amixer -D pulse set Master 2%+ > /dev/null
     volume=`get_volume`
-    amixer set Master "$volume"%,"$volume"% > /dev/null
+    amixer -D pulse set Master "$volume"%,"$volume"% > /dev/null
     send_notification
     ;;
   down)
 
-    amixer set Master on > /dev/null
-    amixer set Master 2%- > /dev/null
+    amixer -D pulse set Master on > /dev/null
+    amixer -D pulse set Master 2%- > /dev/null
     volume=`get_volume`
-    amixer set Master "$volume"%,"$volume"% > /dev/null
+    amixer -D pulse set Master "$volume"%,"$volume"% > /dev/null
     send_notification
     ;;
   mute)
     # Toggle mute
-    amixer set Master 1+ toggle > /dev/null
+    amixer -D pulse set Master 1+ toggle > /dev/null
     if is_mute ; then
       DIR=`dirname "$0"`
       $DIR/notify-send.sh -i "/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-muted.svg" --replace=555 -u normal "Muted" -t 2000

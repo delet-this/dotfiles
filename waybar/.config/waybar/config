@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [ ],
-    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "cpu", "memory", "temperature", "backlight", "custom/weather", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "cpu", "memory", "temperature", "backlight", "custom/weather", "battery", "battery#bat2", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -66,7 +66,8 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%a %d/%m %H:%M}"
+        /* "format-alt": "{:%Y-%m-%d}" */
     },
     "cpu": {
         "format": "{usage}% ",

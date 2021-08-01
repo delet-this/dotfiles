@@ -19,7 +19,7 @@ for_window [class="^.*"] border pixel 4
 set $launch rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
 set $menu rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
 # bindsym $mod+shift+l exec $launch
-bindsym $mod+shift+d exec $menu
+bindsym $mod+shift+d exec --no-startup-id $HOME/.local/bin/sway_hide.py
 bindsym $mod+d exec $menu
 bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
@@ -30,23 +30,24 @@ bindsym $mod+u exec --no-startup-id sudo vm-attach.sh attach
 # exec --no-startup-id xrandr --output DVI-D-0 --primary
 set $primaryMonitor DVI-D-1
 set $secondaryMonitor HDMI-A-1
-output $primaryMonitor pos 1920 0
-output $primaryMonitor mode 1920x1080@144Hz
 output $secondaryMonitor pos 0 0
+output $primaryMonitor pos 1920 0 mode 1920x1080@144Hz
 output * background $wallpaper fill
 seat * hide_cursor 30000
 
 # Workspaces on specific monitors
 workspace 1 output $primaryMonitor
+workspace 2 output $primaryMonitor
 workspace 3 output $primaryMonitor
+workspace 4 output $primaryMonitor
 workspace 5 output $primaryMonitor
-workspace 7 output $primaryMonitor
-workspace 9 output $primaryMonitor
-workspace 2 output $secondaryMonitor
-workspace 4 output $secondaryMonitor
 workspace 6 output $secondaryMonitor
+workspace 7 output $secondaryMonitor
 workspace 8 output $secondaryMonitor
+workspace 9 output $secondaryMonitor
 workspace 10 output $secondaryMonitor
+workspace none1 output $primaryMonitor
+workspace none2 output $secondaryMonitor
 
 # Autostart
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -56,7 +57,7 @@ exec --no-startup-id gammastep
 exec --no-startup-id waybar
 exec --no-startup-id dunst
 exec --no-startup-id whoogle-search
-exec --no-startup-id pulseeffects --gapplication-service
+exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id autotiling
 exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
@@ -98,11 +99,12 @@ for_window [title="^Steam Keyboard$"] floating enable
 
 # Assign programs to specific workspaces
 assign [class="Firefox|Chromium"] → $ws1
-assign [class="^discord$"] → $ws2
-#assign [class="^Steam$"] → $ws4
-assign [class="Steam"] → $ws4
-#assign [Title="osu!"] → $ws3
-# assign [Title="- OpenGL"] → $ws3
+assign [class="^discord$"] → $ws6
+#assign [class="^Steam$"] → $ws7
+assign [class="Steam"] → $ws7
+assign [title="osu!"] → $ws3
+assign [title=".* - OpenGL"] → $ws3
+assign [class="gamescope"] → $ws3
 #assign [class="^Wine$"] → $ws3
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -176,7 +178,7 @@ set $Locker betterlockscreen -l dim && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -212,6 +214,10 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+# tab cycle workspaces
+bindsym $mod+tab workspace next_on_output
+bindsym $mod+Shift+tab workspace prev_on_output
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.local/bin/volume.sh up"
@@ -298,15 +304,16 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-input * {
-    xkb_layout "us(altgr-intl)"
+input type:keyboard {
+    xkb_layout "us(altgr-intl),fi"
+    # xkb_variant "nodeadkeys"
+    xkb_options "grp:alt_space_toggle"
+    repeat_rate 60
+    repeat_delay 250
 }
 
 input type:pointer {
     accel_profile "flat"
     pointer_accel -0.55
-    scroll_factor 2.25
+    # scroll_factor 1.25
 }
-
-input type:keyboard repeat_delay 250
-input type:keyboard repeat_rate 60
