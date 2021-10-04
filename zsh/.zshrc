@@ -1,4 +1,8 @@
-# TERM=xterm-256color
+# Source .aliasrc if exists
+if [ -f ~/.aliasrc ]; then
+    . ~/.aliasrc
+fi
+
 PURE_PROMPT_SYMBOL="λ"
 
 # history
@@ -10,11 +14,14 @@ setopt SHARE_HISTORY
 
 # completion
 autoload -U compinit
+compinit
+# Enable completion menu
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
+# Include hidden files.
+_comp_options+=(globdots)
 #setopt complete_aliases
+# Auto update PATH entries
 zstyle ':completion:*' rehash true
 
 # auto quote urls
@@ -42,38 +49,12 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 bindkey '^H' backward-kill-word
 
-# aliases
-alias ls='ls -hN --color=auto --group-directories-first'
-alias ip="ip -c"
-alias cal='cal -m'
-alias ccat='pygmentize -g'
-alias reboot="sudo systemctl reboot"
-alias poweroff="sudo systemctl poweroff"
-alias halt="sudo systemctl halt"
-alias weather="curl wttr.in/varkaus"
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias yt="youtube-dl --add-metadata -i"
-alias yta="yt -x -f bestaudio/best"
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -vI"
-alias imv='imv -c "exec _wid=\$(xdo id);xprop -f WM_CLIENT_MACHINE 8s -set WM_CLIENT_MACHINE \$(hostname) -id \$_wid;xprop -f _NET_WM_PID 32c -set _NET_WM_PID \$imv_pid -id \$_wid;pidswallow -gt \$_wid"'
-alias syu="sudo pacman -Syu"
-alias make="make -j$(nproc)"
-alias v="vim"
-alias vc="vim .vimrc"
-alias pac="sudo pacman"
-alias librewolf-wayland="MOZ_ENABLE_WAYLAND=1 librewolf"
-
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
-
 # locale
 export LANG='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
 # print stats if command took longer than 10s
-export REPORTTIME=10
+# export REPORTTIME=10
 
 # correction
 setopt CORRECT
@@ -84,9 +65,10 @@ setopt autocd
 #zstyle ':prompt:pure:prompt:*' color white
 
 # pywal colors
-cat ~/.cache/wal/sequences;
+# cat ~/.cache/wal/sequences;
+(cat $HOME/.config/wpg/sequences &)
 
-export FZF_DEFAULT_COMMAND="fd"
+export FZF_DEFAULT_COMMAND="fd --type f --type l --hidden -E .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 #export FZF_ALT_C_COMMAND="fd -t d . $HOME"
@@ -118,10 +100,12 @@ zinit light-mode for \
 ## End of Zinit's installer chunk
 zinit light Aloxaf/fzf-tab
 zinit light zdharma/fast-syntax-highlighting
-#zinit light zsh-users/zsh-autosuggestions
 zinit light mafredri/zsh-async
 zinit light sindresorhus/pure
 zinit light hlissner/zsh-autopair
+zinit light chrissicool/zsh-256color
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
 
 # These have to be after plugins for some reason
 # Ctrl backspace, Ctrl left/right
