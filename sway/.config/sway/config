@@ -10,28 +10,33 @@ client.background       $color2
 
 # Basic stuff
 set $mod Mod4
+set $TERMINAL kitty
 gaps inner 5
 gaps outer 5
 # new_window 1pixel
 default_border pixel 4
 for_window [class="^.*"] border pixel 4
 
-set $launch rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
-set $menu rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
+set $rofi XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share \
+          $HOME/.local/bin/rofi-sway-focused-monitor 
+set $launch $rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
+set $menu $rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
 # bindsym $mod+shift+l exec $launch
 bindsym $mod+shift+d exec --no-startup-id $HOME/.local/bin/sway_hide.py
 bindsym $mod+d exec $menu
 bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print exec grim -g "$(slurp)" - | up - | wl-copy
-bindsym $mod+u exec --no-startup-id sudo vm-attach.sh attach
+bindsym $mod+u exec --no-startup-id sudo ~/.local/bin/vm-attach.sh attach
 
 # Monitors
 # exec --no-startup-id xrandr --output DVI-D-0 --primary
 set $primaryMonitor DVI-D-1
 set $secondaryMonitor HDMI-A-1
 output $secondaryMonitor pos 0 0
-output $primaryMonitor pos 1920 0 mode 1920x1080@144Hz
+output $primaryMonitor mode 1920x1080@144Hz
+# Lightboost test
+# output $primaryMonitor modeline 286.7 1920 1968 2000 2080 1080 1083 1088 1149 +HSync -VSync
 output * background $wallpaper fill
 seat * hide_cursor 30000
 
@@ -57,8 +62,8 @@ exec --no-startup-id gammastep
 exec --no-startup-id waybar
 exec --no-startup-id dunst
 exec --no-startup-id whoogle-search
-exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id autotiling
+# exec --no-startup-id easyeffects --gapplication-service
+# exec --no-startup-id autotiling
 exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id scream -o pulse -i virbr0
