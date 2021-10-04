@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Alias vim to nvim if exists
+if [ -x "$(command -v nvim)" ]; then 
+  alias vim="nvim" vimdiff="nvim -d"
+fi
+
+# Auto sudo for these commands
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+  alias $command="sudo $command"
+done; unset command
+
+# Enhanced defaults, colors etc.
+alias ls='ls -hN --color=auto --group-directories-first'
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -vI"
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ip="ip -c"
+alias cal='cal -m'
+
+# Shorthands
+alias ll='ls -la --color=auto --group-directories-first'
+alias ccat='pygmentize -g'
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias yt="youtube-dl --add-metadata -i"
+alias yta="yt -x -f bestaudio/best"
+alias imv='imv -c "exec _wid=\$(xdo id);xprop -f WM_CLIENT_MACHINE 8s -set WM_CLIENT_MACHINE \$(hostname) -id \$_wid;xprop -f _NET_WM_PID 32c -set _NET_WM_PID \$imv_pid -id \$_wid;pidswallow -gt \$_wid"'
+alias syu="pacman -Syu"
+alias make="make -j$(nproc)"
+alias v="vim"
+alias vc="vim ~/.config/nvim/init.vim"
+alias pac="pacman"
