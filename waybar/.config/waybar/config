@@ -151,7 +151,7 @@
         "on-click-right": "playerctl next"
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/Varkaus?format=1'",
+        "exec": "curl 'https://wttr.in/Tampere,Pappila?format=1'",
         "interval": 1800
   }
 }
