@@ -28,4 +28,5 @@ if ([ -z "$DISPLAY" ] && [ $XDG_VTNR -eq 1 ]); then
   export XDG_SESSION_TYPE=wayland
   export LIBSEAT_BACKEND=logind
   exec sway
+  # startx
 fi
