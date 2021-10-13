@@ -1,6 +1,6 @@
 
 configuration {
-	font: "Terminus (TTF) 12";
+	font: "Iosevka 10";
 	bw: 0;
 	separator-style: "none";
 	hide-scrollbar: true;
