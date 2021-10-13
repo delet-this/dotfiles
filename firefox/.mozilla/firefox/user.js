@@ -1,9 +1,15 @@
+// Enable user css
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
+// Personal preferences
 user_pref("general.autoScroll", true);
 user_pref("dom.security.https_only_mode", true);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
 user_pref("media.hardwaremediakeys.enabled", false);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
+user_pref("browser.tabs.insertAfterCurrent", true);
+user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
+// user_pref("network.http.referer.defaultPolicy.pbmode", 3);
 
 // Disable annoyances
 user_pref("full-screen-api.warning.delay", 0);
