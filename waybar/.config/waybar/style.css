@@ -3,13 +3,14 @@
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: Roboto, Helvetica, Arial, sans-serif;*/
-    font-family: Ubuntu;
-    font-size: 14px;
+    /* font-family: Ubuntu Light; */
+    font-family: Ubuntu Light;
+    font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(34, 34, 34, 1.0);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: #ffffff;
     transition-property: background-color;
@@ -17,11 +18,11 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 5px;
-    margin: 0 1px;
+    padding: 0 2px;
+    margin: 0 0px;
     background-color: transparent;
     color: #ffffff;
-    border-bottom: 3px solid rgba(255,255,255,0.3);
+    border-bottom: 3px solid rgba(255,255,255,0.0);
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -32,7 +33,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    border-bottom: 3px solid rgba(255, 255, 255, 1.0);
+    border-bottom: 3px solid rgba(186,135,164, 1.0);
 }
 
 #workspaces button.urgent {
@@ -40,8 +41,8 @@ window#waybar {
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: #BA87A4;
+    /* border-bottom: 3px solid #ffffff; */
 }
 
 #clock,
@@ -63,5 +64,5 @@ window#waybar {
     padding-top: 3px;
     margin: 0 4px;
     color: #ffffff;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 3px solid rgba(186,135,164, 1.0);
 }
