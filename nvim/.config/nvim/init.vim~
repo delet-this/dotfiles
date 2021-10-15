@@ -27,18 +27,14 @@ if has('nvim')
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
-  Plug 'tami5/lspsaga.nvim'
   " Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mfussenegger/nvim-lint'
+  Plug 'tami5/lspsaga.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'nanotee/sqls.nvim'
-  " Add LSP support to existing themes
   Plug 'folke/lsp-colors.nvim'
-  " Indentation guides
   Plug 'lukas-reineke/indent-blankline.nvim'
-  " Illuminate other uses of variable etc.
-  Plug 'rrethy/vim-illuminate'
 endif
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'neoclide/jsonc.vim'
@@ -133,7 +129,7 @@ set background=light
 set colorcolumn=80
 " set cursorline
 let g:sonokai_style = 'andromeda'
-let g:onedark_terminal_italics = 2
+set g:onedark_terminal_italics = 2
 colorscheme sonokai
 if !has('nvim')
   colorscheme gruvbox
