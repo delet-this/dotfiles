@@ -10,7 +10,7 @@ client.background       $color2
 
 # Basic stuff
 set $mod Mod4
-set $TERMINAL kitty
+# set $TERMINAL kitty
 gaps inner 5
 gaps outer 5
 # new_window 1pixel
@@ -20,12 +20,14 @@ for_window [class="^.*"] border pixel 4
 # Rofi wayland multi-monitor fix
 set $rofi XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share \
           $HOME/.local/bin/rofi-sway-focused-monitor 
+          # -run-list-command ". ~/.local/bin/zsh_aliases_functions.sh" -run-command "/bin/zsh -i -c '{cmd}'" -rnow
 set $launch $rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
 set $menu $rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
 # bindsym $mod+shift+l exec $launch
 bindsym $mod+shift+d exec --no-startup-id $HOME/.local/bin/sway_hide.py
 bindsym $mod+d exec $menu
-bindsym $mod+w exec MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+w exec $BROWSER
+bindsym $mod+e exec kitty zsh -c 'source .zshrc; $EDITOR'
 bindsym $mod+m exec thunderbird
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print exec grim -g "$(slurp)" - | up - | wl-copy
