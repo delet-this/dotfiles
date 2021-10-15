@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-monitor=1
+monitor=3
 output=3
 devices=(046D:C53F CDCD:6868 1AF3:0001)
 vmname=$(virsh list | sed -n '3p' | sed -nr 's/ *[0-9]+ +(.*) +running/\1/p')
@@ -27,7 +27,7 @@ then
     do
             attach_device "$vmname" $dev attach
     done
-    # ddcutil setvcp 60 $monitor --bus=$output
+    ddcutil setvcp 60 $monitor --bus=$output
 else
     for dev in "${devices[@]}"
     do

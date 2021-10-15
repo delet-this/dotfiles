@@ -17,4 +17,5 @@ MONITOR_ID=$(rofi --help | grep $XWAYLAND_OUTPUT -B1 \
 	| sed -sr '/ID/!d;s/[^:]*:\s([0-9])/\1/')
 
 # stdin for dmenu mode
-rofi -m $MONITOR_ID $@ </dev/stdin
+# rofi -m $MONITOR_ID $@ </dev/stdin
+rofi -m $MONITOR_ID "$@"
