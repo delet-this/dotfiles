@@ -5,5 +5,3 @@ bold_italic_font auto
 font_size 10.0
 
 touch_scroll_multiplier 5.0
-
-mouse_map left click ungrabbed mouse_click_url_or_select
