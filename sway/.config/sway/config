@@ -72,6 +72,7 @@ exec --no-startup-id autotiling
 exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id scream -o pulse -i virbr0
+exec --no-startup-id nm-applet --indicator
 
 # Variables for workspace names
 set $ws1 "1"

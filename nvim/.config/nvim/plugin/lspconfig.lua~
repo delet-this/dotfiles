@@ -43,7 +43,7 @@ end
 
 require'lspconfig'.pyright.setup {
   on_attach = function(client)
-    on_attach()
+    on_attach
     require 'illuminate'.on_attach(client)
   end,
   capabilities = capabilities,
