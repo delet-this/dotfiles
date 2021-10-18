@@ -1,73 +1,43 @@
 #!/bin/bash
 
-# You can call this script like this:
-# $./volume.sh up
-# $./volume.sh down
-# $./volume.sh mute
+VOLUME_STEP=2
+PA_MAX_VOLUME=100
 
-function get_volume {
-  amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+get_current_master_volume() {
+    pactl list sinks | \
+        grep "Name:\|Volume:" | \
+        grep -v "Base Volume:" | \
+        sed 'N;s/\n//' | \
+        grep $(pactl info| grep "Default Sink" | cut -d' ' -f3) | \
+        awk '{print ($7 + $14)/2}'
 }
 
-function is_mute {
-  amixer -D pulse get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+get_volume_as_a_percentage() {
+        echo "$(get_current_master_volume) / ${PA_MAX_VOLUME} * 100" | bc -l | cut -d'.' -f1
 }
 
-function send_notification {
-  DIR=`dirname "$0"`
-  volume=`get_volume`
-  # Make the bar with the special character ─ (it's not dash -)
-  # https://en.wikipedia.org/wiki/Box-drawing_character
-  #bar=$(seq -s "─" $(($volume/5)) | sed 's/[0-9]//g')
-  if [ "$volume" = "0" ]; then
-    icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-muted.svg"
-    $DIR/notify-send.sh "$volume""      " -i "$icon_name" -t 2000 -h int:value:"$volume" -h string:synchronous:"─" --replace=555
-  else
-    if [  "$volume" -lt "10" ]; then
-      icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-low.svg"
-      $DIR/notify-send.sh "$volume""     " -i "$icon_name" --replace=555 -t 2000
-    else
-      if [ "$volume" -lt "30" ]; then
-        icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-low.svg"
-      else
-        if [ "$volume" -lt "70" ]; then
-          icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-medium.svg"
+case "$1" in
+    up)
+        if [[ $PA_MAX_VOLUME -gt $(expr $(get_current_master_volume) + $VOLUME_STEP) ]]; then
+            pactl set-sink-volume @DEFAULT_SINK@ +${VOLUME_STEP}%
         else
-          icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-high.svg"
+            pactl set-sink-volume @DEFAULT_SINK@ ${PA_MAX_VOLUME}%
         fi
-      fi
-    fi
-  fi
-  bar=$(seq -s "─" $(($volume/5)) | sed 's/[0-9]//g')
-  # Send the notification
-  $DIR/notify-send.sh "$volume""     ""$bar" -i "$icon_name" -t 2000 -h int:value:"$volume" -h string:synchronous:"$bar" --replace=555
+        get_volume_as_a_percentage > ${SWAYSOCK}.wob
+        ;;
 
-}
-
-case $1 in
-  up)
-    amixer -D pulse set Master on > /dev/null
-    amixer -D pulse set Master 2%+ > /dev/null
-    volume=`get_volume`
-    amixer -D pulse set Master "$volume"%,"$volume"% > /dev/null
-    send_notification
-    ;;
-  down)
-
-    amixer -D pulse set Master on > /dev/null
-    amixer -D pulse set Master 2%- > /dev/null
-    volume=`get_volume`
-    amixer -D pulse set Master "$volume"%,"$volume"% > /dev/null
-    send_notification
-    ;;
-  mute)
-    # Toggle mute
-    amixer -D pulse set Master 1+ toggle > /dev/null
-    if is_mute ; then
-      DIR=`dirname "$0"`
-      $DIR/notify-send.sh -i "/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-muted.svg" --replace=555 -u normal "Muted" -t 2000
-    else
-      send_notification
-    fi
-    ;;
+    down)
+        if [[ 0 -lt $(expr $(get_current_master_volume) - $VOLUME_STEP) ]]; then
+            pactl set-sink-volume @DEFAULT_SINK@ -${VOLUME_STEP}%
+        else
+            pactl set-sink-volume @DEFAULT_SINK@ 0%
+        fi
+        get_volume_as_a_percentage > ${SWAYSOCK}.wob
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        ;;
+    status|*)
+        get_volume_as_a_percentage
+        ;;
 esac

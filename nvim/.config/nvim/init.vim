@@ -23,11 +23,12 @@ endif
 " Language support
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
   " Plug 'creativenull/diagnosticls-configs-nvim'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/nvim-cmp'
-  Plug 'tami5/lspsaga.nvim'
+  " Plug 'tami5/lspsaga.nvim', { 'commit': 'c884214b57fea2f5f6f04e1245a3e55cc19bbe96'}
   " Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mfussenegger/nvim-lint'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,7 +54,8 @@ endif
   Plug 'tpope/vim-sleuth'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-commentary'
+  " Plug 'tpope/vim-commentary'
+  Plug 'numToStr/Comment.nvim'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-fugitive'
@@ -67,6 +69,15 @@ endif
   Plug 'jdhao/better-escape.vim'
   Plug 'lambdalisue/suda.vim'
   Plug 'mg979/vim-visual-multi'
+  if has('nvim')
+    Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'gelguy/wilder.nvim'
+
+    " To use Python remote plugin features in Vim, can be skipped
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
 " More text objects/targets
   Plug 'wellle/targets.vim'
 " Themes
@@ -81,7 +92,7 @@ endif
   Plug 'sainnhe/sonokai'
   Plug 'joshdick/onedark.vim'
   Plug 'glepnir/dashboard-nvim'
-  Plug 'ryanoasis/vim-devicons' 
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'dstein64/vim-startuptime'
 
 call plug#end()
@@ -124,6 +135,7 @@ set smartcase
 syntax on
 filetype plugin indent on
 " Visual
+set signcolumn=yes
 set showtabline=1
 set noshowmode
 set nowrap

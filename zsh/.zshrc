@@ -45,8 +45,8 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^R" history-incremental-search-backward
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/**/key-bindings.zsh
+source /usr/share/fzf/completion.zsh 2> /dev/null
 bindkey '^H' backward-kill-word
 
 # locale

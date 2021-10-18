@@ -19,8 +19,9 @@ for_window [class="^.*"] border pixel 4
 
 # Rofi wayland multi-monitor fix
 set $rofi XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share \
-          $HOME/.local/bin/rofi-sway-focused-monitor 
-          # -run-list-command ". ~/.local/bin/zsh_aliases_functions.sh" -run-command "/bin/zsh -i -c '{cmd}'" -rnow
+          rofi \
+          -run-list-command ". ~/.local/bin/zsh_aliases_functions.sh" -run-command "/bin/zsh -i -c '{cmd}'" -rnow
+          # $HOME/.local/bin/rofi-sway-focused-monitor 
 set $launch $rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
 set $menu $rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
 # bindsym $mod+shift+l exec $launch
@@ -73,6 +74,7 @@ exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id scream -o pulse -i virbr0
 exec --no-startup-id nm-applet --indicator
+exec --no-startup-id wl-paste -t text --watch clipman store
 
 # Variables for workspace names
 set $ws1 "1"
@@ -239,8 +241,8 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
