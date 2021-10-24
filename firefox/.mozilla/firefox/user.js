@@ -9,7 +9,9 @@ user_pref("media.hardwaremediakeys.enabled", false);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 user_pref("browser.tabs.insertAfterCurrent", true);
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
-// user_pref("network.http.referer.defaultPolicy.pbmode", 3);
+user_pref("browser.fullscreen.autohide", false)
+// Disable password manager
+user_pref("browser.safebrowsing.passwords.enabled", false)
 
 // Disable annoyances
 user_pref("full-screen-api.warning.delay", 0);
