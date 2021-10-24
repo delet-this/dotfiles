@@ -4,8 +4,11 @@
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: Roboto, Helvetica, Arial, sans-serif;*/
     /* font-family: Ubuntu Light; */
-    font-family: Ubuntu Light;
+    font-family: "Ubuntu Nerd Font";
     font-size: 12px;
+    /* font-variant-ligatures: none; */
+    /* font-feature-settings: "liga" 0; */
+    /* font-variant-ligatures: normal; */
     min-height: 0;
 }
 
