@@ -66,4 +66,4 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap Q @q
 
 "FZF
-nnoremap <leader>vcc :FZF ~/.dotfiles<CR>
+nnoremap <leader>vcc :FZF ~/dotfiles<CR>

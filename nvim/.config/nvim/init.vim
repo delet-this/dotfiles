@@ -41,9 +41,6 @@ if has('nvim')
   " Illuminate other uses of variable etc.
   Plug 'rrethy/vim-illuminate'
 endif
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Plug 'neoclide/jsonc.vim'
-  " Plug 'dense-analysis/ale'
   Plug 'puremourning/vimspector'
   Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
   Plug 'Vimjas/vim-python-pep8-indent'
@@ -80,6 +77,7 @@ endif
   endif
 " More text objects/targets
   Plug 'wellle/targets.vim'
+
 " Themes
   " Plug 'itchyny/lightline.vim'
   if !has('nvim')
@@ -94,8 +92,9 @@ endif
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'dstein64/vim-startuptime'
-
+  Plug 'karb94/neoscroll.nvim'
 call plug#end()
+
 
 if has('termguicolors')
   set termguicolors
@@ -115,6 +114,14 @@ set wildmode=longest:full,full
 " set completeopt=menu,menuone,noselect
 set undofile
 set backup
+set backupcopy
+
+let g:backupdir=expand(stdpath('data') . '/backup')
+if !isdirectory(g:backupdir)
+   mkdir(g:backupdir, "p")
+endif
+let &backupdir=g:backupdir
+
 set mouse=a
 " System clipboard
 set clipboard=unnamedplus
