@@ -211,13 +211,13 @@ set $lock swaylock \
         # --indicator-x-position 130 \
         # --indicator-y-position 640 \
 
-exec_always killall swayidle; swayidle -w \
-         timeout 300 '$lock' \
-         timeout 300 'swaymsg "output * dpms off"' \
-         resume 'swaymsg "output * dpms on"' \
-         timeout 60 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
-         before-sleep '$lock' \
-         lock '$lock'
+# exec_always killall swayidle; swayidle -w \
+#          timeout 300 '$lock' \
+#          before-sleep '$lock' \
+#          lock '$lock'
+# timeout 300 'swaymsg "output * dpms off"' \
+# resume 'swaymsg "output * dpms on"' \
+# timeout 60 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
