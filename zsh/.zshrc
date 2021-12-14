@@ -62,7 +62,7 @@ setopt CORRECT
 # more options
 setopt nobeep
 setopt autocd
-#zstyle ':prompt:pure:prompt:*' color white
+# zstyle ':prompt:pure:prompt:*' color white
 
 # pywal colors
 # cat ~/.cache/wal/sequences;
@@ -76,36 +76,27 @@ export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 export PF_INFO="title os host kernel uptime pkgs memory wm shell palette"
 export PF_ASCII="linux"
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+
+# Clone zcomet if necessary
+if [[ ! -f ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh ]]; then
+  command git clone https://github.com/agkozak/zcomet.git ${ZDOTDIR:-${HOME}}/.zcomet/bin
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-## End of Zinit's installer chunk
-zinit light Aloxaf/fzf-tab
-zinit light zdharma/fast-syntax-highlighting
-zinit light mafredri/zsh-async
-zinit light sindresorhus/pure
-zinit light hlissner/zsh-autopair
-zinit light chrissicool/zsh-256color
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
+zcomet load Aloxaf/fzf-tab
+zcomet load chrissicool/zsh-256color
+zcomet load ohmyzsh plugins/gitfast
+zcomet load ohmyzsh plugins/git
+ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_FIXTERM=false
+zcomet load ohmyzsh plugins/tmux
+zcomet load mafredri/zsh-async
+zcomet load sindresorhus/pure
+zcomet load zsh-users/zsh-syntax-highlighting
+zcomet load zsh-users/zsh-completions
+zcomet load MenkeTechnologies/zsh-more-completions
+zcomet load ohmyzsh plugins/colored-man-pages
 
 # These have to be after plugins for some reason
 # Ctrl backspace, Ctrl left/right

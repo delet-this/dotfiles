@@ -5,13 +5,15 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("general.autoScroll", true);
 user_pref("dom.security.https_only_mode", true);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
-user_pref("media.hardwaremediakeys.enabled", false);
+// user_pref("media.hardwaremediakeys.enabled", false);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 user_pref("browser.tabs.insertAfterCurrent", true);
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
 user_pref("browser.fullscreen.autohide", false)
 // Disable password manager
-user_pref("browser.safebrowsing.passwords.enabled", false)
+user_pref("signon.rememberSignons", false);
+// Open ALL links in a new tab instead of new window
+user_pref("browser.link.open_newwindow.restriction", 0);
 
 // Disable annoyances
 user_pref("full-screen-api.warning.delay", 0);

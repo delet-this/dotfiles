@@ -67,7 +67,7 @@ endif
   Plug 'lambdalisue/suda.vim'
   Plug 'mg979/vim-visual-multi'
   if has('nvim')
-    Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'gelguy/wilder.nvim', {'do': ':UpdateRemotePlugins'}
   else
     Plug 'gelguy/wilder.nvim'
 
@@ -85,7 +85,7 @@ endif
   endif
   if has('nvim')
     Plug 'ellisonleao/gruvbox.nvim'
-    Plug 'shadmansaleh/lualine.nvim'
+    Plug 'nvim-lualine/lualine.nvim'
   endif
   Plug 'sainnhe/sonokai'
   Plug 'joshdick/onedark.vim'
@@ -126,6 +126,7 @@ set mouse=a
 " System clipboard
 set clipboard=unnamedplus
 " Indent
+set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -139,8 +140,10 @@ set incsearch
 set ignorecase
 set smartcase
 " Syntax
-syntax on
-filetype plugin indent on
+if !has('nvim')
+  syntax on
+  filetype plugin indent on
+endif
 " Visual
 set signcolumn=yes
 set showtabline=1

@@ -2,8 +2,8 @@ configuration {
     modi: "drun";
     terminal: "termite";
     /* theme: "sidestyle.rasi"; */
-    theme: "clean.rasi";
     show-icons: true;
     display-drun: "";
     sidebar-mode: false;
 }
+@theme "clean.rasi"

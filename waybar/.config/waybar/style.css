@@ -4,7 +4,7 @@
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: Roboto, Helvetica, Arial, sans-serif;*/
     /* font-family: Ubuntu Light; */
-    font-family: "Ubuntu Nerd Font";
+    font-family: "Ubuntu Nerd Font", "DejaVu Sans Mono";
     font-size: 12px;
     /* font-variant-ligatures: none; */
     /* font-feature-settings: "liga" 0; */
@@ -67,5 +67,5 @@ window#waybar {
     padding-top: 3px;
     margin: 0 4px;
     color: #ffffff;
-    border-bottom: 3px solid rgba(186,135,164, 1.0);
+    /* border-bottom: 3px solid rgba(186,135,164, 1.0); */
 }

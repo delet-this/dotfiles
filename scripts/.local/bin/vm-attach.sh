@@ -2,7 +2,7 @@
 
 monitor=3
 output=3
-devices=(046D:C53F CDCD:6868 1AF3:0001)
+devices=(046D:C53F 7844:6868 1AF3:0001)
 vmname=$(virsh list | sed -n '3p' | sed -nr 's/ *[0-9]+ +(.*) +running/\1/p')
 
 attach_device() {
