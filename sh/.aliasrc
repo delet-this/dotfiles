@@ -38,3 +38,20 @@ alias v="vim"
 alias vc="vim ~/.config/nvim/init.vim"
 alias pac="pacman"
 alias win10="sudo virsh start win10"
+alias serve="browser-sync start --server --files ."
+
+# Helper function to hide emacsclient daemon startup output
+quietEmacsclient() {
+    local pid=$(ps -edf | grep ${USER} | grep emacs | grep daemon | awk '{print $2}')
+    if [[ "${pid}" == "" ]]; then
+        # notify -i emacs "Emacs" "New emacs daemon"
+        emacs --daemon  > /dev/null 2>&1
+    fi
+    emacsclient "$@"
+}
+
+alias emacs="quietEmacsclient -cn -a ''"
+alias ec="emacs"
+alias e="quietEmacsclient -nw -a ''"
+# alias eb="emacsbare"
+# alias emacsbare="emacs -nw -Q --eval \"(load-theme 'misterioso)\""
