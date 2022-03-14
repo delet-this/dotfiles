@@ -24,11 +24,11 @@
 
 PROG=$( basename $0 )
 
-KITTY_ONLY=""
-[[ "$1" == "--kitty-only" ]] && {
-    KITTY_ONLY="true"
-    shift
-}
+# KITTY_ONLY=""
+# [[ "$1" == "--kitty-only" ]] && {
+#     KITTY_ONLY="true"
+#     shift
+# }
 
 CMD="$1"
 
@@ -78,21 +78,21 @@ case "$CMD" in
         #new_gtk_theme='Crux'
 
         # new_kitty_theme="$HOME/.config/kitty/Adwaita.conf"
-        new_kitty_theme=
+        # new_kitty_theme=
         # new_fg='black'
         # new_fg='00/00/00'
         # new_bg='white'
         # new_bg='ff/ff/ff'
         # BRIGHTNESS=100
-        TERM_BACKGROUND=light
+        # TERM_BACKGROUND=light
         ;;
     *)
         # dark mode
         #new_emacs_theme="dichromacy-dark-bh"
-        new_emacs_theme="modus-vivendi"
+        # new_emacs_theme="modus-vivendi"
         #new_emacs_theme="manoj-dark-bh"
         #new_emacs_theme="solarized-dark"
-        new_emacs_modeline_theme="smart-mode-line-dark"
+        # new_emacs_modeline_theme="smart-mode-line-dark"
 
         new_gtk_theme='Adwaita-dark'
         #new_gtk_theme='Solarized-Dark'
@@ -106,26 +106,26 @@ case "$CMD" in
         # new_bg='black'
         # new_bg='00/00/00'
         # BRIGHTNESS=0
-        TERM_BACKGROUND=dark
+        # TERM_BACKGROUND=dark
         ;;
 esac
 
 (
     [[ -z "$KITTY_ONLY" ]] && {
-        brightness $BRIGHTNESS
+        # brightness $BRIGHTNESS
 
         # look for an emacs running as this user:
-        emacs_pid=$(pgrep -u $USER emacs | head -n 1)
-        [[ "$emacs_pid" ]] && emacsclient --eval "
-          (progn
-            (mapcar 'disable-theme custom-enabled-themes)
-            (load-theme '$new_emacs_theme t))"
+        # emacs_pid=$(pgrep -u $USER emacs | head -n 1)
+        # [[ "$emacs_pid" ]] && emacsclient --eval "
+        #   (progn
+        #     (mapcar 'disable-theme custom-enabled-themes)
+        #     (load-theme '$new_emacs_theme t))"
         #(load-theme '$new_emacs_modeline_theme))"
 
         f=~/.gtkrc-2.0
         [[ -w $f ]] && sed -i "s/^gtk-theme-name=.*/gtk-theme-name=\"$new_gtk_theme\"/" $f
 
-        gtkreload # gtk2 only!
+        # gtkreload # gtk2 only!
 
         f=~/.config/gtk-3.0/settings.ini
         [[ -w $f ]] && sed -i "s/^gtk-theme-name=.*/gtk-theme-name=$new_gtk_theme/" $f
@@ -143,22 +143,22 @@ esac
     # requires this in ~/.config/kitty/kitty.conf:
     # allow_remote_control yes
     # listen_on unix:/tmp/kitty-socket
-    for SOCK in /tmp/kitty-socket-*; do
-        if [[ -r $new_kitty_theme ]]; then
-            kitty @ --to=unix:$SOCK set-colors -a $new_kitty_theme
-        else
-            # this should work for all terms:
-            for TERM in /dev/pts/[0-9]*; do
-                if [[ -O $TERM ]]; then
-                    {
-                        printf "\\033]10;rgb:$new_fg\\033\\\\"
-                        printf "\\033]11;rgb:$new_bg\\033\\\\"
-                    } >$TERM
-                fi
-            done  
-            # kitty @ --to=unix:$SOCK set_colors --all foreground=$new_fg background=$new_bg
-        fi
-    done
+    # for SOCK in /tmp/kitty-socket-*; do
+    #     if [[ -r $new_kitty_theme ]]; then
+    #         kitty @ --to=unix:$SOCK set-colors -a $new_kitty_theme
+    #     else
+    #         # this should work for all terms:
+    #         for TERM in /dev/pts/[0-9]*; do
+    #             if [[ -O $TERM ]]; then
+    #                 {
+    #                     printf "\\033]10;rgb:$new_fg\\033\\\\"
+    #                     printf "\\033]11;rgb:$new_bg\\033\\\\"
+    #                 } >$TERM
+    #             fi
+    #         done  
+    #         # kitty @ --to=unix:$SOCK set_colors --all foreground=$new_fg background=$new_bg
+    #     fi
+    # done
 
     # for 'low-power' script:
     echo $TERM_BACKGROUND > $DARK_MODE_STATUS_FILE
