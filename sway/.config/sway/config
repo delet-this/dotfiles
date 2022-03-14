@@ -33,7 +33,7 @@ bindsym $mod+e exec kitty zsh -c 'source .zshrc; $EDITOR'
 bindsym $mod+m exec thunderbird
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print exec grim -g "$(slurp)" - | up - | wl-copy
-bindsym $mod+u exec --no-startup-id sudo ~/.local/bin/vm-attach.sh attach
+bindsym $mod+p exec --no-startup-id sudo ~/.local/bin/vm-attach.sh attach
 
 bindsym --release $mod+Print exec \
   swaymsg -t get_tree | \
@@ -46,12 +46,23 @@ bindsym --release $mod+Print exec \
 set $laptop LVDS-1
 set $primaryMonitor DP-1
 set $secondaryMonitor HDMI-A-1
+
+output * adaptive_sync on
+# output $primaryMonitor mode 2560x1440@120hz
+output $primaryMonitor modeline 1097.75  3840 4176 4600 5360  2160 2163 2168 2276 -hsync +vsync
+output $primaryMonitor scale 1.5
+xwayland scale 1
+output $secondaryMonitor transform 270
+
 output $secondaryMonitor pos 0,0
-output $primaryMonitor mode 1920x1080@144Hz
+# output $primaryMonitor pos 1920,-535
+output $secondaryMonitor mode 1920x1080
+# output $secondaryMonitor mode 1920x1080@60hz
+
 # output $laptop scale 1.1
-# Lightboost test
-# output $primaryMonitor modeline 286.7 1920 1968 2000 2080 1080 1083 1088 1149 +HSync -VSync
+
 output * background $wallpaper fill
+
 seat * hide_cursor 30000
 
 # Workspaces on specific monitors
@@ -82,6 +93,7 @@ exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id scream -o pulse -i virbr0
 exec --no-startup-id nm-applet --indicator
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # exec --no-startup-id wl-paste -t text --watch clipman store
 
 # bar {
@@ -136,7 +148,9 @@ for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Require
 for_window [title="^Steam Keyboard$"] floating enable
 
 # Assign programs to specific workspaces
-assign [class="Firefox|Chromium"] → $ws1
+# assign [class="Firefox|Chromium"] → $ws1
+# assign [app_id="firefox"] → $ws1
+# assign [title="Firefox"] → $ws1
 assign [class="^discord$"] → $ws6
 #assign [class="^Steam$"] → $ws7
 assign [class="Steam"] → $ws7
@@ -182,7 +196,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+t split toggle
+bindsym $mod+BackSpace split toggle
 
 # split in horizontal orientation
 # bindsym $mod+h split h
@@ -286,7 +300,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+tab workspace next_on_output
 bindsym $mod+Shift+tab workspace prev_on_output
 
-bindsym $mod+s layout tabbed
+bindsym $mod+s layout toggle tabbed split
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.local/bin/volume.sh up"
@@ -376,7 +390,7 @@ mode "$mode_gaps_outer" {
 input type:keyboard {
     xkb_layout "us(altgr-intl),fi"
     # xkb_variant "nodeadkeys"
-    xkb_options "grp:alt_space_toggle"
+    # xkb_options "grp:alt_space_toggle"
     repeat_rate 60
     repeat_delay 250
 }
@@ -388,6 +402,8 @@ input type:pointer {
     # scroll_method "on_button_down"
     # scroll_button 2
 }
+
+bindsym $alt+space exec --no-startup-id "swaymsg input 'type:keyboard' xkb_switch_layout next"
 
 input "2:10:TPPS/2_IBM_TrackPoint" {
     # accel_profile "flat"
