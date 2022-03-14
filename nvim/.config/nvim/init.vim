@@ -10,6 +10,8 @@ endif
 
 call plug#begin(data_dir . '/plugged')
 if has('nvim')
+  Plug 'lewis6991/impatient.nvim'
+  Plug 'nathom/filetype.nvim'
 " Telescope and its deps
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -25,14 +27,23 @@ if has('nvim')
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/nvim-lsp-installer'
   " Plug 'creativenull/diagnosticls-configs-nvim'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'rafamadriz/friendly-snippets'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/nvim-cmp'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
+  " Plug 'mfussenegger/nvim-jdtls'
   " Plug 'tami5/lspsaga.nvim', { 'commit': 'c884214b57fea2f5f6f04e1245a3e55cc19bbe96'}
   " Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'mfussenegger/nvim-lint'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'nanotee/sqls.nvim'
   " Add LSP support to existing themes
   Plug 'folke/lsp-colors.nvim'
@@ -88,13 +99,26 @@ endif
     Plug 'nvim-lualine/lualine.nvim'
   endif
   Plug 'sainnhe/sonokai'
-  Plug 'joshdick/onedark.vim'
+  " Plug 'joshdick/onedark.vim'
+  Plug 'mjlbach/onedark.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'dstein64/vim-startuptime'
   Plug 'karb94/neoscroll.nvim'
 call plug#end()
 
+lua require('impatient')
+
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+" let g:did_load_filetypes = 1
+" let g:do_filetype_lua = 1
 
 if has('termguicolors')
   set termguicolors
@@ -154,16 +178,22 @@ set laststatus=2
 set background=light
 set colorcolumn=80
 " set cursorline
+
 let g:sonokai_style = 'andromeda'
-let g:onedark_terminal_italics = 2
 colorscheme sonokai
-if !has('nvim')
-  colorscheme gruvbox
-endif
+
+" colorscheme onedark
+" let g:onedark_terminal_italics = 2
+
+" if !has('nvim')
+  " colorscheme gruvbox
+" endif
+
 " Easier to read search results imo
 let bg_color = synIDattr(hlID("Normal"), "bg")
 execute printf('highlight Search guibg=%s guifg=yellow gui=underline', bg_color)
 execute printf('highlight IncSearch guibg=%s guifg=yellow gui=underline', bg_color)
+
 " Misc
 set hidden
 set confirm

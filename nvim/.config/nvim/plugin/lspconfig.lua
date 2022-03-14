@@ -1,5 +1,3 @@
-local nvim_lsp = require('lspconfig')
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
@@ -30,6 +28,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+-- local nvim_lsp = require('lspconfig')
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- local servers = { 'sqls' }
@@ -103,70 +102,78 @@ end)
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- luasnip setup
+local luasnip = require 'luasnip'
+require("luasnip.loaders.from_vscode").load()
+
 -- nvim-cmp setup
 local cmp = require'cmp'
-cmp.setup({
-snippet = {
-  expand = function(args)
-    -- For `vsnip` user.
-    -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
-
-    -- For `luasnip` user.
-    -- require('luasnip').lsp_expand(args.body)
-
-    -- For `ultisnips` user.
-    -- vim.fn["UltiSnips#Anon"](args.body)
-  end,
-},
-mapping = {
-  ['<C-p>'] = cmp.mapping.select_prev_item(),
-  ['<C-n>'] = cmp.mapping.select_next_item(),
-  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-  ['<C-f>'] = cmp.mapping.scroll_docs(4),
-  ['<C-Space>'] = cmp.mapping.complete(),
-  ['<C-e>'] = cmp.mapping.close(),
-  ['<CR>'] = cmp.mapping.confirm {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = true,
+  cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
   },
-  ['<Tab>'] = function(fallback)
-    if cmp.visible() then
-      cmp.select_next_item()
-    -- elseif luasnip.expand_or_jumpable() then
-    --   luasnip.expand_or_jump()
-    else
-      fallback()
-    end
-  end,
-  ['<S-Tab>'] = function(fallback)
-    if cmp.visible() then
-      cmp.select_prev_item()
-    -- elseif luasnip.jumpable(-1) then
-    --   luasnip.jump(-1)
-    else
-      fallback()
-    end
-  end,
-},
-sources = {
-  { name = 'nvim_lsp' },
+  -- completion = {
+  --   autocomplete = false,
+  -- },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
-  -- For vsnip user.
-  -- { name = 'vsnip' },
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
 
-  -- For luasnip user.
-  -- { name = 'luasnip' },
-
-  -- For ultisnips user.
-  -- { name = 'ultisnips' },
-
-  { name = 'buffer' },
-}
-})
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   -- Disable inline diagnostics
-  -- virtual_text = false,
+  virtual_text = false,
   signs = true,
   underline = true,
   update_in_insert = false,
@@ -176,9 +183,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
 -- vim.o.updatetime = 250
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(0, {scope="line"})]]
-
-
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(0, {focusable=false, scope="cursor", close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"}})]]
 
 -- Change gutter icons
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
