@@ -1,5 +1,4 @@
-# Add ~/.local/bin to $PATH
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH"
 
 # Set default applications
 export EDITOR="nvim"
@@ -18,6 +17,8 @@ export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1
 # PyCharm wayland fix
 export _JAVA_AWT_WM_NONREPARENTING=1
+# Emacs LSP plists
+export LSP_USE_PLISTS=true
 
 # Start graphical session
 if ([ -z "$DISPLAY" ] && [ $XDG_VTNR -eq 1 ]); then
@@ -27,6 +28,6 @@ if ([ -z "$DISPLAY" ] && [ $XDG_VTNR -eq 1 ]); then
   export XDG_CURRENT_DESKTOP="sway:Unity"
   export XDG_SESSION_TYPE=wayland
   export LIBSEAT_BACKEND=logind
-  exec sway
+  exec dbus-run-session sway
   # startx
 fi
