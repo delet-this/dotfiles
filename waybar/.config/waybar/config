@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [ ],
-    "modules-right": ["custom/media", "pulseaudio", "cpu", "memory", "temperature", "backlight", "custom/weather", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "cpu", "memory", "temperature", "backlight", "custom/weather", "battery", "battery#bat2", "sway/language", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -108,6 +108,9 @@
     "battery#bat2": {
         "bat": "BAT2"
     },
+    "sway/language": {
+        "format": "{}",
+    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -151,8 +154,8 @@
         "on-click-right": "playerctl next"
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/Tampere,Pappila?format=1'",
-        "interval": 1800
+        "exec": "curl 'https://wttr.in/Tampere,Kaleva?format=1' | grep -v Unknown",
+        "interval": 900
   }
 }
 // vim: ft=jsonc
