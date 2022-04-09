@@ -23,11 +23,11 @@ export LSP_USE_PLISTS=true
 # Start graphical session
 if ([ -z "$DISPLAY" ] && [ $XDG_VTNR -eq 1 ]); then
   # exec startx -- -keeptty vt1 &> /dev/null
-  # XDG_SESSION_TYPE=wayland exec dbus-run-session gnome-session
-  # XDG_SESSION_TYPE=wayland exec gnome-shell --wayland
+  # export WLR_DRM_DEVICES=/dev/dri/card0
   export XDG_CURRENT_DESKTOP="sway:Unity"
   export XDG_SESSION_TYPE=wayland
   export LIBSEAT_BACKEND=logind
-  exec dbus-run-session sway
+  # exec dbus-run-session sway
+  exec sway
   # startx
 fi

@@ -9,8 +9,14 @@ client.urgent           $color2         $color2         $foreground  $color2    
 client.placeholder      $color2         $color2         $foreground  $color2           $color2
 client.background       $color2
 
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user import-environment DISPLAY
+exec systemctl --user import-environment WAYLAND_DISPLAY
+exec systemctl --user import-environment SWAYSOCK
+
 # Basic stuff
 set $mod Mod4
+set $alt Mod1
 # set $TERMINAL kitty
 # gaps inner 5
 # gaps outer 5
@@ -51,6 +57,7 @@ output * adaptive_sync on
 # output $primaryMonitor mode 2560x1440@120hz
 output $primaryMonitor modeline 1097.75  3840 4176 4600 5360  2160 2163 2168 2276 -hsync +vsync
 output $primaryMonitor scale 1.5
+# output $primaryMonitor scale 1
 xwayland scale 1
 output $secondaryMonitor transform 270
 
@@ -93,7 +100,6 @@ exec --no-startup-id import-gtk-settings.sh
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id scream -o pulse -i virbr0
 exec --no-startup-id nm-applet --indicator
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # exec --no-startup-id wl-paste -t text --watch clipman store
 
 # bar {

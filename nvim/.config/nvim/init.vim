@@ -78,6 +78,11 @@ endif
   Plug 'lambdalisue/suda.vim'
   Plug 'mg979/vim-visual-multi'
   if has('nvim')
+    function! UpdateRemotePlugins(...)
+      " Needed to refresh runtime files
+      let &rtp=&rtp
+      UpdateRemotePlugins
+    endfunction
     Plug 'gelguy/wilder.nvim', {'do': ':UpdateRemotePlugins'}
   else
     Plug 'gelguy/wilder.nvim'

@@ -1,4 +1,8 @@
 #!/bin/sh
 
+#  --no-sandbox --disable-breakpad --disable-logging --disable-metrics --disable-metrics-reporting --disable-dev-tools --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu-memory-buffer-video-frames --use-gl=egl --ignore-gpu-blocklist --enable-gpu-rasterization --enable-oop-rasterization --enable-zero-copy --enable-vulkan --max-gum-fps="400"
+# --enable-features=UseOzonePlatform --ozone-platform=wayland --use-gl=egl
+export vblank_mode=0 
 cd ~/Games/KrunkerIdkr
-./idkr-portable-linux-x86_64.AppImage --no-sandbox --disable-breakpad --disable-logging --disable-metrics --disable-metrics-reporting --disable-dev-tools --enable-features=UseOzonePlatform --ozone-platform=wayland --disable-gpu-memory-buffer-video-frames --use-gl=egl --ignore-gpu-blocklist --enable-gpu-rasterization --enable-oop-rasterization --enable-zero-copy --enable-vulkan --max-gum-fps="400"
+./idkr-portable-linux-x86_64.AppImage --use-gl=egl --ozone-platform=auto --no-sandbox --disable-breakpad --disable-logging --disable-metrics --disable-metrics-reporting --disable-dev-tools  --disable-gpu-memory-buffer-video-frames  --ignore-gpu-blocklist --enable-gpu-rasterization --enable-oop-rasterization --enable-zero-copy --enable-vulkan --disable-gpu-driver-bug-workarounds
+

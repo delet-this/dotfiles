@@ -3,7 +3,6 @@ call wilder#setup({
       \ 'enable_cmdline_enter': 0,
       \ })
 
-
 call wilder#set_option('pipeline', [
       \   wilder#branch(
       \     wilder#cmdline_pipeline({
