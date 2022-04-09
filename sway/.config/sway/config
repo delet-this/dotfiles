@@ -58,7 +58,7 @@ output * adaptive_sync on
 # output $primaryMonitor modeline 1097.75  3840 4176 4600 5360  2160 2163 2168 2276 -hsync +vsync
 output $primaryMonitor scale 1.5
 # output $primaryMonitor scale 1
-xwayland scale 1
+# xwayland scale 1
 output $secondaryMonitor transform 270
 
 output $secondaryMonitor pos 0,0
