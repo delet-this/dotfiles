@@ -45,7 +45,7 @@ require'nvim-treesitter.configs'.setup {
       ['[]'] = '@class.outer',
     },
   },
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   context_commentstring = {
     enable = true,
   },
