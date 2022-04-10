@@ -50,8 +50,8 @@ quietEmacsclient() {
     emacsclient "$@"
 }
 
-alias emacs="quietEmacsclient -cn -a ''"
-alias ec="emacs"
+# alias emacs="quietEmacsclient -cn -a ''"
+alias ec="quietEmacsclient -cn -a ''"
 alias e="quietEmacsclient -nw -a ''"
 # alias eb="emacsbare"
 # alias emacsbare="emacs -nw -Q --eval \"(load-theme 'misterioso)\""
