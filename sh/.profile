@@ -1,5 +1,5 @@
 export PATH="$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH"
-
+[ -f "/home/himera/.ghcup/env" ] && source "/home/himera/.ghcup/env" # ghcup-env
 # Set default applications
 export EDITOR="nvim"
 export VEDITOR="code"
