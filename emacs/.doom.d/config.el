@@ -37,7 +37,7 @@
 
 ;; LSP prefs
 (setq lsp-use-plists t)
-(setq lsp-idle-delay 0.05)
+(setq lsp-idle-delay 0.100)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
