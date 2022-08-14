@@ -1,13 +1,13 @@
-include "$HOME/.cache/wal/colors-sway"
+# include "$HOME/.cache/wal/colors-sway"
 
 
 
-client.focused          $color2         $color2         $foreground  $color2           $color2
-client.focused_inactive $background     $background     $foreground  $background       $background
-client.unfocused        $background     $background     $foreground  $background       $background
-client.urgent           $color2         $color2         $foreground  $color2           $color2
-client.placeholder      $color2         $color2         $foreground  $color2           $color2
-client.background       $color2
+# client.focused          $color2         $color2         $foreground  $color2           $color2
+# client.focused_inactive $background     $background     $foreground  $background       $background
+# client.unfocused        $background     $background     $foreground  $background       $background
+# client.urgent           $color2         $color2         $foreground  $color2           $color2
+# client.placeholder      $color2         $color2         $foreground  $color2           $color2
+# client.background       $color2
 
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user import-environment DISPLAY
@@ -30,7 +30,8 @@ set $rofi XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:/var/lib/flatpa
           -run-list-command ". ~/.local/bin/zsh_aliases_functions.sh" -run-command "/bin/zsh -i -c '{cmd}'" -rnow
           # $HOME/.local/bin/rofi-sway-focused-monitor 
 set $launch $rofi -show drun --terminal $TERMINAL -fullscreen -fake-transparency -fake-background screenshot
-set $menu $rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
+# set $menu $rofi -show run -sorting-method fzf -sort -config $HOME/.config/rofi/old.rasi
+set $menu bemenu-run -i -H 25
 bindsym $mod+shift+n exec $launch
 bindsym $mod+shift+d exec --no-startup-id $HOME/.local/bin/sway_hide.py
 bindsym $mod+d exec $menu
@@ -68,7 +69,7 @@ output $secondaryMonitor mode 1920x1080
 
 # output $laptop scale 1.1
 
-output * background $wallpaper fill
+# output * background $wallpaper fill
 
 seat * hide_cursor 30000
 
@@ -91,7 +92,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gammastep
 #exec --no-startup-id python ~/animu_rpc_server.py
 #exec --no-startup-id python ~/discord-rpc-mpris/main.py
-exec_always --no-startup-id "killall waybar; waybar"
+exec_always --no-startup-id "pkill waybar; waybar"
 exec --no-startup-id dunst
 exec --no-startup-id whoogle-search
 exec --no-startup-id easyeffects --gapplication-service
@@ -235,22 +236,23 @@ set $lock swaylock \
         --daemonize \
         --ignore-empty-password \
         --show-failed-attempts \
-        --screenshots \
-        --clock \
-        --indicator \
-        --indicator-radius 100 \
-        --indicator-thickness 7 \
-        --effect-blur 7x5 \
-        --effect-vignette 0.5:0.5 \
-        --ring-color 00000088 \
-        --key-hl-color 880033 \
-        --line-color 00000000 \
-        --inside-color 00000088 \
-        --text-color a1a1a1 \
-        --separator-color 00000000 \
-        --grace 1 \
+        -c 505050 \
         --hide-keyboard-layout \
-        --fade-in 0.2
+        # --clock \
+        # --screenshots \
+        # --indicator \
+        # --indicator-radius 100 \
+        # --indicator-thickness 7 \
+        # --effect-blur 7x5 \
+        # --effect-vignette 0.5:0.5 \
+        # --ring-color 00000088 \
+        # --key-hl-color 880033 \
+        # --line-color 00000000 \
+        # --inside-color 00000088 \
+        # --text-color a1a1a1 \
+        # --separator-color 00000000 \
+        # --grace 1 \
+        # --fade-in 0.2
         # --indicator-x-position 130 \
         # --indicator-y-position 640 \
 
@@ -418,3 +420,5 @@ input "2:10:TPPS/2_IBM_TrackPoint" {
 }
 
 include @sysconfdir@/sway/config.d/*
+exec dbus-sway-environment
+exec configure-gtk
