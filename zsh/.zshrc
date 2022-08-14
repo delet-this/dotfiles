@@ -7,10 +7,13 @@ PURE_PROMPT_SYMBOL="λ"
 
 # history
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
+HISTSIZE=10000000
 SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
 
 # completion
 autoload -U compinit
@@ -45,9 +48,12 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^R" history-incremental-search-backward
+source $HOME/.local/bin/fzf-key-bindings.zsh
+source $HOME/.local/bin/fzf-completion.zsh 2> /dev/null
 # source /usr/share/fzf/**/key-bindings.zsh
 # source /usr/share/fzf/completion.zsh 2> /dev/null
 bindkey '^H' backward-kill-word
+bindkey -s "^[[1;3D" "cd ..^M"
 
 # locale
 export LANG='en_US.UTF-8'
