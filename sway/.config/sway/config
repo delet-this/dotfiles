@@ -55,8 +55,8 @@ set $primaryMonitor DP-1
 set $secondaryMonitor HDMI-A-1
 
 output * adaptive_sync on
-# output $primaryMonitor mode 2560x1440@120hz
-# output $primaryMonitor modeline 1097.75  3840 4176 4600 5360  2160 2163 2168 2276 -hsync +vsync
+# output $primaryMonitor mode 3840x2160@97hz
+output $primaryMonitor modeline 1097.75  3840 4176 4600 5360  2160 2163 2168 2276 -hsync +vsync
 output $primaryMonitor scale 1.5
 # output $primaryMonitor scale 1
 # xwayland scale 1
@@ -89,7 +89,7 @@ workspace none2 output $secondaryMonitor
 
 # Autostart
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id gammastep
+exec_always --no-startup-id "killall gammastep; sleep 5; gammastep"
 #exec --no-startup-id python ~/animu_rpc_server.py
 #exec --no-startup-id python ~/discord-rpc-mpris/main.py
 exec_always --no-startup-id "pkill waybar; waybar"
