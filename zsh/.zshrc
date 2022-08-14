@@ -45,8 +45,8 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^R" history-incremental-search-backward
-source /usr/share/fzf/**/key-bindings.zsh
-source /usr/share/fzf/completion.zsh 2> /dev/null
+# source /usr/share/fzf/**/key-bindings.zsh
+# source /usr/share/fzf/completion.zsh 2> /dev/null
 bindkey '^H' backward-kill-word
 
 # locale
@@ -66,7 +66,7 @@ setopt autocd
 
 # pywal colors
 # cat ~/.cache/wal/sequences;
-(cat $HOME/.config/wpg/sequences &)
+# (cat $HOME/.config/wpg/sequences &)
 
 export FZF_DEFAULT_COMMAND="fd --type f --type l --hidden -E .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -90,7 +90,7 @@ zcomet load ohmyzsh plugins/gitfast
 zcomet load ohmyzsh plugins/git
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_FIXTERM=false
-zcomet load ohmyzsh plugins/tmux
+# zcomet load ohmyzsh plugins/tmux
 zcomet load mafredri/zsh-async
 zcomet load sindresorhus/pure
 zcomet load zsh-users/zsh-syntax-highlighting
