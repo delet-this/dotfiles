@@ -73,7 +73,8 @@ case "$CMD" in
         #new_emacs_theme="solarized-light"
         # new_emacs_modeline_theme="smart-mode-line-light"
 
-        new_gtk_theme='Adwaita'
+        # new_gtk_theme='Adwaita'
+        new_gtk_theme='Catppuccin'
         #new_gtk_theme='Solarized-Light'
         #new_gtk_theme='Crux'
 
@@ -94,7 +95,8 @@ case "$CMD" in
         #new_emacs_theme="solarized-dark"
         # new_emacs_modeline_theme="smart-mode-line-dark"
 
-        new_gtk_theme='Adwaita-dark'
+        # new_gtk_theme='Adwaita-dark'
+        new_gtk_theme='Catppuccin-dark'
         #new_gtk_theme='Solarized-Dark'
         #new_gtk_theme='Crux-dark'
 

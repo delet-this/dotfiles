@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VOLUME_STEP=2
 PA_MAX_VOLUME=100
