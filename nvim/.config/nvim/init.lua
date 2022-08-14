@@ -108,6 +108,10 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+
 -- Set colorscheme
 vim.o.termguicolors = true
 -- require('onedark').load()
@@ -343,7 +347,7 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'hls', 'jdtls', 'rnix' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'jdtls', 'rnix' }
 
 -- Ensure the servers above are installed
 require('nvim-lsp-installer').setup {
@@ -383,6 +387,21 @@ require('lspconfig').sumneko_lua.setup {
       telemetry = { enable = false, },
     },
   },
+}
+
+require('lspconfig').clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "clangd",
+          "--clang-tidy",
+          "--clang-tidy-checks=*",
+          "--all-scopes-completion",
+          "--cross-file-rename",
+          "--completion-style=detailed",
+          "--header-insertion-decorators",
+          "--header-insertion=iwyu",
+          "--suggest-missing-includes",
+  }
 }
 
 -- nvim-cmp setup
@@ -427,6 +446,16 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+require("null-ls").setup({
+    sources = {
+        -- require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.diagnostics.statix,
+        require("null-ls").builtins.diagnostics.deadnix,
+        require("null-ls").builtins.diagnostics.cppcheck,
+        -- require("null-ls").builtins.completion.spell,
+    },
+})
 
 -- Load default highlight colors for leap
 -- vim.api.nvim_create_autocmd('ColorScheme', {
