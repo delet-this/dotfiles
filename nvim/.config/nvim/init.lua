@@ -69,6 +69,9 @@ if is_bootstrap then
   return
 end
 
+-- Load impatient
+require('impatient')
+
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -158,9 +161,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
--- Load impatient
-require('impatient')
 
 require('nvim-surround').setup()
 
