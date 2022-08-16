@@ -71,7 +71,7 @@ setopt autocd
 # zstyle ':prompt:pure:prompt:*' color white
 
 # pywal colors
-# cat ~/.cache/wal/sequences;
+cat ~/.cache/wal/sequences;
 # (cat $HOME/.config/wpg/sequences &)
 
 export FZF_DEFAULT_COMMAND="fd --type f --type l --hidden -E .git"
